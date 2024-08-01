@@ -1,0 +1,30 @@
+.header{
+    display: flex;
+    flex-direction: row;
+}
+
+.logo {
+    width: 4em;
+    height: 4em;
+    padding: 1em;
+}
+
+.nav{
+    margin: 1em;
+    padding: 1em;
+    border-radius: 15%;
+
+}
+.nav:hover {
+    color: white;
+    background-color: black;
+}
+
+.search-input{
+    width: auto;
+    display: flex;
+    margin: 1em;
+    margin-left: auto;
+    border-radius: 12%;
+    /* // TODO: Background color  */
+}

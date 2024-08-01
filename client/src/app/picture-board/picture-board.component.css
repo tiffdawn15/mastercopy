@@ -1,0 +1,17 @@
+.container{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: auto auto auto auto; 
+    grid-template-rows: 1fr min-content;
+    gap: 1em;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 15%;
+} 
+.title {
+    padding: 1em;
+}
