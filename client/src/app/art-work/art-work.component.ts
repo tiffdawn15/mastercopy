@@ -11,27 +11,22 @@ import { Component } from '@angular/core';
 })
 export class ArtWorkComponent {
   id = '';
-  image: string = '';
   title: string = '';
   artist: string = '';
   url: string = '';
 
   constructor(
     private imageService: ImageService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.id = this.route.snapshot.paramMap.get('id}')!;
     this.getImage();
-
- 
   }
 
   getImage() {
     console.log(this.id);
     this.imageService.getArtwork(this.id).subscribe((resp) => {
-      console.log(resp);
       this.url = `https://www.artic.edu/iiif/2/${resp.data.image_id}/full/843,/0/default.jpg`;
-      console.log(this.image);
       this.title = resp.data.title;
       this.artist = resp.data.artist_title;
     });
