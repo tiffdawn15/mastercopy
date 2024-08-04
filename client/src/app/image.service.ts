@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+export interface Pagination {
+  page: number,
+  limit: number,
+  total?: number,
+}
 export interface Image {
   id: number;
   image_id: number;
@@ -14,6 +19,7 @@ export interface ImageObject {
   // config: number;
   data: Image[];
   category_titles: string[];
+  pagination: Pagination;
 }
 
 export interface ImageData {
@@ -25,13 +31,12 @@ export interface ImageData {
 })
 export class ImageService {
   // Sample image url
-  getArtworks = 'https://api.artic.edu/api/v1/artworks';
-  search = 'https://api.artic.edu/api/v1/artworks/search?q=monet';
 
   constructor(private http: HttpClient) {}
 
-  getArtWorks() {
-    return this.http.get<ImageObject>(this.getArtworks);
+  getArtWorks(page: Pagination) {
+    let getArtworks = `https://api.artic.edu/api/v1/artworks?page=${page.page}&limit=${page.limit}`
+    return this.http.get<ImageObject>(getArtworks);
   }
 
   searchArtWorks(term: string){
@@ -39,7 +44,7 @@ export class ImageService {
    return this.http.get<ImageObject>(searchUrl);
   }
 
-  getArtwork(id: number){
+  getArtwork(id: string){
     let artworkUrl = `https://api.artic.edu/api/v1/artworks/${id}`;
     return this.http.get<any>(artworkUrl);
   }
