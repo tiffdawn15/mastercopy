@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { PictureBoardComponent } from './picture-board/picture-board.component';
 import { ExploreComponent } from './explore/explore.component';
 import { ArtWorkComponent } from './art-work/art-work.component';
+import { AboutComponent } from './about/about.component';
 
 // export const routes: Routes = [
 //   {
@@ -34,7 +35,10 @@ import { ArtWorkComponent } from './art-work/art-work.component';
 
 export const routes: Routes = [
   { path: '', component: PictureBoardComponent },
+  { path: '', component: PictureBoardComponent },
+
   { path: 'explore', component: ExploreComponent },
+  { path: 'about', component: AboutComponent },
   {
     path: `artwork/:id}`,
     loadComponent: () =>

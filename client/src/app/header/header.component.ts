@@ -28,7 +28,6 @@ export class HeaderComponent {
   constructor(private router: Router) {}
 
   search(): void {
-    console.log('searching');
     if (this.searchQuery) {
       this.searchEvent.emit(this.searchQuery.trim());
 
