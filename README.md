@@ -16,3 +16,4 @@ FETCH pictures from AIC's artwork in a paginated grid table. Search AIC's built 
 
 ## Next Phase: 
 User accounts so use can favorite a piece to collection. Adding backend for this functionality. 
+
