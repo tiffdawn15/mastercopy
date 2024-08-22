@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ImageService, Image, Pagination } from './../image.service';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
@@ -19,6 +19,8 @@ interface Photo {
   styleUrl: './picture-board.component.css',
 })
 export class PictureBoardComponent {
+  @Input() searchQuery: string = '';
+
   images: Photo[] = [];
   length = 50;
   pageSize = 10;
@@ -61,6 +63,7 @@ export class PictureBoardComponent {
   }
 
   onSearch(term: string) {
+    this.images = [];
     this.imageService.searchArtWorks(term.toString()).subscribe((resp) => {
       this.images = [];
 
@@ -105,8 +108,6 @@ export class PictureBoardComponent {
   }
 
   onClick(id: number) {
-    console.log('click');
     this.router.navigate([`/artwork/${id}`]);
-
   }
 }

@@ -19,4 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'Mumbos-Big-Jumbo';
+  searchQuery: string = '';
+
+ 
 }

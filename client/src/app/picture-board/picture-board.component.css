@@ -4,6 +4,7 @@
     grid-template-columns: auto auto auto auto auto; 
     grid-template-rows: 1fr min-content;
     gap: 1em;
+    margin: 1em;
 }
 
 .image {

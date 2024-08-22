@@ -3,24 +3,18 @@
   <div class="nav">
     <div class="">
       <div class="">
-        <a mat-fab extended routerLink="/" > Home </a>
+        <a mat-fab extended routerLink="/"> Home </a>
       </div>
     </div>
   </div>
 
   <div class="nav">
-    <a mat-fab routerLink="/explore">
-      Explore
-    </a>
+    <a mat-fab routerLink="/explore"> Explore </a>
   </div>
 
   <div class="nav">
-    <a mat-fab routerLink="/about">
-      About
-    </a>
+    <a mat-fab routerLink="/about"> About </a>
   </div>
-
-
   <input
     type="text"
     [(ngModel)]="searchQuery"
@@ -29,4 +23,3 @@
     (change)="search()"
   />
 </div>
-
