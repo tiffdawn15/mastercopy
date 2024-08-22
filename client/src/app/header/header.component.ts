@@ -1,3 +1,4 @@
+import { ImageService } from './../image.service';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
@@ -22,19 +23,27 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
   @Output() searchEvent = new EventEmitter<string>();
-
   searchQuery: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private imageService: ImageService, 
+    private router: Router) {}
 
   search(): void {
-    console.log('searching');
     if (this.searchQuery) {
       this.searchEvent.emit(this.searchQuery.trim());
 
       console.log(this.searchQuery);
-      // Navigate to the search results page with the query as a parameter
-      // this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
     }
   }
+
+  // onSearch(term: string) {
+  //   this.imageService.searchArtWorks(term.toString()).subscribe((resp) => {
+  //     this.images = [];
+
+  //     resp.data.forEach((image: Image) => {
+  //       this.getImage(image.id);
+  //     });
+  //   });
+  // }
+
 }

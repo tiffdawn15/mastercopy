@@ -1,0 +1,19 @@
+.artwork-container {
+    display: flex;
+    margin: 3em;
+    margin-left: 15em;
+    width: 75%;
+    height: fit-content;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5em;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.artwork {
+    border-radius: 5em;
+}
