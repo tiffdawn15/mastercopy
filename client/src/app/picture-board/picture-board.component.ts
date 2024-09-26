@@ -14,6 +14,7 @@ interface Photo {
 @Component({
   selector: 'app-picture-board',
   standalone: true,
+
   imports: [CommonModule, HeaderComponent, MatPaginatorModule],
   templateUrl: './picture-board.component.html',
   styleUrl: './picture-board.component.css',
@@ -32,9 +33,9 @@ export class PictureBoardComponent {
   showFirstLastButtons = true;
   disabled = false;
 
-  constructor(private imageService: ImageService, 
-    private router: Router
-  ) {
+  constructor(
+      private imageService: ImageService, 
+      private router: Router) {
     const page = {
       page: this.pageIndex,
       limit: this.pageSize,
@@ -46,7 +47,7 @@ export class PictureBoardComponent {
     this.images = [];
     this.imageService.getArtWorks(page).subscribe((resp) => {
       this.length = resp.pagination.total ? resp.pagination.total : 0;
-  
+
       resp.data.forEach((image: Image) => {
         const id = image.image_id;
         if (id) {
@@ -82,7 +83,7 @@ export class PictureBoardComponent {
       page: this.pageIndex,
       limit: this.pageSize,
     };
-    console.log(page)
+    console.log(page);
     this.getImages(page);
   }
 
@@ -93,7 +94,7 @@ export class PictureBoardComponent {
         const id = data.image_id;
         if (id) {
           const url = `https://www.artic.edu/iiif/2/${id}/full/843,/0/default.jpg`;
-          const photo: Photo = { 
+          const photo: Photo = {
             id: id,
             url: url,
             title: data.title,
