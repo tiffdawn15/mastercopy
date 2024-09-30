@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ImageService, Image, Pagination } from './../image.service';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface Photo {
   id: number;
@@ -19,7 +19,7 @@ interface Photo {
   templateUrl: './picture-board.component.html',
   styleUrl: './picture-board.component.css',
 })
-export class PictureBoardComponent {
+export class PictureBoardComponent implements OnInit {
   @Input() searchQuery: string = '';
 
   images: Photo[] = [];
@@ -34,13 +34,22 @@ export class PictureBoardComponent {
   disabled = false;
 
   constructor(
-      private imageService: ImageService, 
-      private router: Router) {
+    private imageService: ImageService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     const page = {
       page: this.pageIndex,
       limit: this.pageSize,
     };
     this.getImages(page);
+  }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      this.searchQuery = params['q'] || '';
+      this.onSearch(this.searchQuery);
+    });
   }
 
   getImages(page: Pagination) {
