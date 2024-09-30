@@ -1,3 +1,13 @@
+.back-button {
+    width: 3em;
+    height: 3em;
+    margin: 3em;
+    display: flex;
+    border-radius: 1em;
+    background-color: #f0f0f0;
+}
+
+
 .artwork-container {
     display: flex;
     margin: 3em;
@@ -9,11 +19,23 @@
 }
 
 .info-container {
+    margin: 1em;
+    width: 50%;
     display: flex;
     flex-direction: column;
-    margin: 1em;
+    justify-content: center;
+
 }
 
 .artwork {
     border-radius: 5em;
+    width: 50%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 3em;
 }

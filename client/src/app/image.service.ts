@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface Pagination {
-  page: number,
-  limit: number,
-  total?: number,
+  page: number;
+  limit: number;
+  total?: number;
 }
 export interface Image {
   id: number;
@@ -35,18 +35,19 @@ export class ImageService {
   constructor(private http: HttpClient) {}
 
   getArtWorks(page: Pagination) {
-    let getArtworks = `https://api.artic.edu/api/v1/artworks?page=${page.page}&limit=${page.limit}`
+    let getArtworks = `https://api.artic.edu/api/v1/artworks?page=${page.page}&limit=${page.limit}`;
     return this.http.get<ImageObject>(getArtworks);
   }
 
-  searchArtWorks(term: string){
-   let searchUrl = `https://api.artic.edu/api/v1/artworks/search?q=${term}`;
-   return this.http.get<ImageObject>(searchUrl);
+  searchArtWorks(term: string) {
+    let searchUrl = `https://api.artic.edu/api/v1/artworks/search?q=${term}`;
+    return this.http.get<ImageObject>(searchUrl);
   }
 
-  getArtwork(id: string){
+  getArtwork(id: string) {
     let artworkUrl = `https://api.artic.edu/api/v1/artworks/${id}`;
     return this.http.get<any>(artworkUrl);
   }
+
 
 }

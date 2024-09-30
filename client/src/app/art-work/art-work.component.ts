@@ -1,11 +1,17 @@
 import { ActivatedRoute } from '@angular/router';
-import { ImageService } from './../image.service';
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
+
+import { ImageService } from './../image.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-art-work',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule, 
+    HeaderComponent
+  ],
   templateUrl: './art-work.component.html',
   styleUrl: './art-work.component.css',
 })
@@ -25,7 +31,8 @@ export class ArtWorkComponent {
 
   constructor(
     private imageService: ImageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.id = this.route.snapshot.paramMap.get('id}')!;
     this.getImage();
@@ -45,5 +52,17 @@ export class ArtWorkComponent {
       this.placeOfOrigin = resp.data.place_of_origin;
       this.provenance_text = resp.data.provenance_text;
     });
+  }
+
+  goToHomePage() {
+    console.log('clicked')
+    this.router.navigate(['/']);
+  }
+
+  onSearch(term: string) {
+    console.log(term);
+
+    // TODO: Implement this function
+    
   }
 }

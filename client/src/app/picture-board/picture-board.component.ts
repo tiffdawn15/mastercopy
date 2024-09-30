@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ImageService, Image, Pagination } from './../image.service';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface Photo {
   id: number;
@@ -14,11 +14,12 @@ interface Photo {
 @Component({
   selector: 'app-picture-board',
   standalone: true,
+
   imports: [CommonModule, HeaderComponent, MatPaginatorModule],
   templateUrl: './picture-board.component.html',
   styleUrl: './picture-board.component.css',
 })
-export class PictureBoardComponent {
+export class PictureBoardComponent implements OnInit {
   @Input() searchQuery: string = '';
 
   images: Photo[] = [];
@@ -32,7 +33,9 @@ export class PictureBoardComponent {
   showFirstLastButtons = true;
   disabled = false;
 
-  constructor(private imageService: ImageService, 
+  constructor(
+    private imageService: ImageService,
+    private route: ActivatedRoute,
     private router: Router
   ) {
     const page = {
@@ -42,11 +45,18 @@ export class PictureBoardComponent {
     this.getImages(page);
   }
 
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      this.searchQuery = params['q'] || '';
+      this.onSearch(this.searchQuery);
+    });
+  }
+
   getImages(page: Pagination) {
     this.images = [];
     this.imageService.getArtWorks(page).subscribe((resp) => {
       this.length = resp.pagination.total ? resp.pagination.total : 0;
-  
+
       resp.data.forEach((image: Image) => {
         const id = image.image_id;
         if (id) {
@@ -82,7 +92,7 @@ export class PictureBoardComponent {
       page: this.pageIndex,
       limit: this.pageSize,
     };
-    console.log(page)
+    console.log(page);
     this.getImages(page);
   }
 
@@ -93,7 +103,7 @@ export class PictureBoardComponent {
         const id = data.image_id;
         if (id) {
           const url = `https://www.artic.edu/iiif/2/${id}/full/843,/0/default.jpg`;
-          const photo: Photo = { 
+          const photo: Photo = {
             id: id,
             url: url,
             title: data.title,
