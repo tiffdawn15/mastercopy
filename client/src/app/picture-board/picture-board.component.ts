@@ -5,7 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 
-interface Photo {
+ export interface Photo {
   id: number;
   url: string;
   title: string;
@@ -38,6 +38,7 @@ export class PictureBoardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    this.images = [];
     const page = {
       page: this.pageIndex,
       limit: this.pageSize,
@@ -50,6 +51,7 @@ export class PictureBoardComponent implements OnInit {
       this.searchQuery = params['q'] || '';
       this.onSearch(this.searchQuery);
     });
+    console.log(this.images);
   }
 
   getImages(page: Pagination) {
@@ -60,7 +62,7 @@ export class PictureBoardComponent implements OnInit {
       resp.data.forEach((image: Image) => {
         const id = image.id;
         if (id) {
-          const url = `https://www.artic.edu/iiif/2/${id}/full/843,/0/default.jpg`;
+          const url = `https://www.artic.edu/iiif/2/${image.image_id}/full/843,/0/default.jpg`;
           const photo: Photo = {
             id: id,
             url: url,
@@ -70,7 +72,6 @@ export class PictureBoardComponent implements OnInit {
         }
       });
     });
-    console.log(this.images);
   }
 
   onSearch(term: string) {
@@ -93,7 +94,6 @@ export class PictureBoardComponent implements OnInit {
       page: this.pageIndex,
       limit: this.pageSize,
     };
-    console.log(page);
     this.getImages(page);
   }
 
@@ -119,8 +119,6 @@ export class PictureBoardComponent implements OnInit {
   }
 
   onClick(image: Photo, id: number) {
-    console.log(image)
-    console.log('clicked', id);
     this.router.navigate([`/artwork/${id}`]);
   }
 } 
