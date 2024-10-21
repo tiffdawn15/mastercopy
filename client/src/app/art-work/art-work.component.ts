@@ -55,7 +55,6 @@ export class ArtWorkComponent {
   }
 
   goToHomePage() {
-    console.log('clicked')
     this.router.navigate(['/']);
   }
 

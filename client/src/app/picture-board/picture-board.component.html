@@ -3,7 +3,7 @@
 
 <div class="container">
   <div *ngFor="let image of images" class="image-container">
-    <img [src]="image.url" class="image" (click)="onClick(image.id)" />
+    <img [src]="image.url" class="image" (click)="onClick(image, image.id)" />
     <p class="title">{{ image.title }}</p>
   </div>
 </div>
