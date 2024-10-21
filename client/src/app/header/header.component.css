@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: row;
   font-family: "Atma", system-ui;
-  font-weight: 400;
+  font-weight: 800;
+
 }
 
 .header a[mat-fab] {
