@@ -1,5 +1,6 @@
 .wrapper {
     display: flex;
+    flex-direction: column;
     margin: 3em;
     width: 80%;
 }
@@ -8,6 +9,13 @@
     width: 48%;
     height: 50%;
     border-radius: 5em;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3em;
 }
 
 .about {
@@ -22,4 +30,9 @@
 .text {
     margin-left: 1em;
     
+}
+
+.three {
+    length: 100%;
+    width: 100%;
 }

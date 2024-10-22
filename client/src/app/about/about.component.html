@@ -1,29 +1,56 @@
 <app-header (searchEvent)="onSearch($event)"></app-header>
 
 <div class="wrapper">
-  <img
-    src="../../assets/Screenshot 2024-10-02 at 12.41.54 PM.png"
-    class="image"
-  />
-  <div class="text">
-    <h2>MasterCopy</h2>
+  <div class="container">
+    <!-- // TODO TIFF: Update this so that the image takes over the entire page -->
+    <img
+      appParallax
+      [ratio]="0.9"
+      src="../../assets/Screenshot 2024-10-02 at 12.41.54 PM.png"
+      class="image"
+    />
+    <div class="text">
+      <h2>MasterCopy</h2>
+
+      <p>
+        MasterCopy is a work of love created by Tiffany Messer a self taught
+        artist and software engineer. She has been dedicated to her art practice
+        since the pandemic and patient about expanding her artist voice through
+        the use of creating master copies of other artist work. After many
+        months of struggling to find good reference photos online, she
+        discovered that Chicago Institute of Art provides and open source API.
+        MasterCopy is a Pinterest clode using CIA’s api. MasterCopy is currently
+        in its infancy. If you art interested in the project please reach out to
+        Tiffany and let her know. She has a lot of ideas about ways to improve
+        the website, and would love to hear how the site works for others.
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- // TODO TIFF: Change this image -->
+    <img
+      src="../../assets/Screenshot 2024-10-02 at 12.41.54 PM.png"
+      class="image"
+    />
 
     <p>
-      MasterCopy is a work of love created by Tiffany Messer a self taught
-      artist and software engineer. She has been dedicated to her art practice
-      since the pandemic and patient about expanding her artist voice through
-      the use of creating master copies of other artist work. After many months
-      of struggling to find good reference photos online, she discovered that
-      Chicago Institute of Art provides and open source API. MasterCopy is a
-      Pinterest clode using CIA’s api. MasterCopy is currently in its infancy.
-      If you art interested in the project please reach out to Tiffany and let
-      her know. She has a lot of ideas about ways to improve the website, and
-      would love to hear how the site works for others.
+      Here are things talking abou t mee/ Blah blah blah I am great. Hey look
+      here oooh you yeahhhhhhhJ"
     </p>
   </div>
+  <div class="three container">
+    <!-- // TODO TIFF: Change this image -->
+    <img
+      src="../../assets/Screenshot 2024-10-02 at 12.41.54 PM.png"
+      class="image"
+    />
+  </div>
+
+  <div class="contact-form continer">
+    <!-- //TODO TIFF: Put a contact us form here -->
+  </div>
 </div>
-
-
 
 <!-- // TODO: Example for parallax scrolling -->
 

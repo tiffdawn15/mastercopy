@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appParallax]',
@@ -8,13 +8,20 @@ export class ParallaxDirective {
   @Input('ratio') parallaxRatio: number = 1;
   initialTop: number = 0;
 
-  constructor(private eleRef: ElementRef) {
-    this.initialTop = this.eleRef.nativeElement.getBoundingClientRect().top;
+  constructor(private eleRef: ElementRef, private renderer: Renderer2) {
+    console.log('ElementRef:', this.eleRef.nativeElement);
   }
+
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
-    this.eleRef.nativeElement.style.top =
-      this.initialTop - window.scrollY * this.parallaxRatio + 'px';
+    const element = this.eleRef.nativeElement;
+    if (element && typeof element.getBoundingClientRect === 'function') {
+      const scrollPosition = window.pageYOffset;
+      const parallaxOffset = scrollPosition * this.parallaxRatio;
+      this.renderer.setStyle(element, 'transform', `translateY(${parallaxOffset}px)`);
+    } else {
+      console.error('Element does not support getBoundingClientRect:', element);
+    }
   }
 }
