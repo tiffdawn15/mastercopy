@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
+import { ParallaxDirective } from '../parallax.directive';
 
 @Component({
   selector: 'app-explore',
   standalone: true,
   imports: [
-    HeaderComponent ,
+    HeaderComponent,
+    ParallaxDirective,
   ],
   templateUrl: './explore.component.html',
   styleUrl: './explore.component.css'
