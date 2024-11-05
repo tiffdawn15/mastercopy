@@ -16,7 +16,6 @@ export interface Image {
 }
 
 export interface ImageObject {
-  // config: number;
   data: Image[];
   category_titles: string[];
   pagination: Pagination;
@@ -30,8 +29,6 @@ export interface ImageData {
   providedIn: 'root',
 })
 export class ImageService {
-  // Sample image url
-
   constructor(private http: HttpClient) {}
 
   getArtWorks(page: Pagination) {
@@ -39,8 +36,8 @@ export class ImageService {
     return this.http.get<ImageObject>(getArtworks);
   }
 
-  searchArtWorks(term: string) {
-    let searchUrl = `https://api.artic.edu/api/v1/artworks/search?q=${term}`;
+  searchArtWorks(term: string, page: Pagination) {
+    let searchUrl = `https://api.artic.edu/api/v1/artworks/search?q=${term}?page=${page.page}&limit=${page.limit}`;
     return this.http.get<ImageObject>(searchUrl);
   }
 
