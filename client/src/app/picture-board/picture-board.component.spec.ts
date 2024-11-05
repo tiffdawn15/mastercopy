@@ -54,14 +54,14 @@ fdescribe('PictureBoardComponent', () => {
     ).componentInstance;
 
     expect(paginator.length).toBe(component.length);
-    expect(paginator.pageSize).toBe(component.pageSize);
+    expect(paginator.pageSize).toBe(component.page.limit);
     expect(paginator.disabled).toBe(component.disabled);
     expect(paginator.showFirstLastButtons).toBe(component.showFirstLastButtons);
     expect(paginator.pageSizeOptions).toEqual(
       component.showPageSizeOptions ? component.pageSizeOptions : []
     );
     expect(paginator.hidePageSize).toBe(component.hidePageSize);
-    expect(paginator.pageIndex).toBe(component.pageIndex);
+    expect(paginator.pageIndex).toBe(component.page.page);
   });
 
   it('should get Images', () => {
