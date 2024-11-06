@@ -1,45 +1,57 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    margin: 3em;
-    width: 80%;
+  display: flex;
+  flex-direction: column;
 }
 
 .image {
-    width: 48%;
-    height: 50%;
-    border-radius: 5em;
+  border-radius: 5em;
+  width: 40em;
+  height: 40em;
 }
+
+.no-borders {
+    width: 100%;
+    padding: 0; 
+    margin: 0;
+  }
 
 .large-image {
     width: 100%;
-    height: 100%;
-    border-radius: 5em;
+    height: auto;
+    display: block;
 }
 
 .container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 3em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5em;
 }
 
 .about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 3em;
-    width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3em;
+  width: 48%;
 }
 
 .text {
-    margin-left: 1em;
-    
+  margin-left: 1em;
+  margin-right: 10em;
+  margin-top: 6em;
+  width: 45%;
 }
 
-.three .two{
-    length: 100%;
-    width: 100%;
+.three {
+  height: 100%;
+  width: 100%;
+}
+
+
+.large-text {
+  font-size: 48px;
+  margin-bottom: 1em;
 }
 
