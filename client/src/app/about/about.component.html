@@ -3,7 +3,7 @@
 <div class="wrapper">
   <div class="one container">
     <div class="text">
-      <h2>Explore More Art History...</h2>
+      <h2 class="large-text">Explore More Art History...</h2>
 
       <p>
         MasterCopy is a work of love created by Tiffany Messer to provide museum
@@ -19,7 +19,7 @@
     />
   </div>
 
-  <div class="two container">
+  <div class="no-borders">
     <img
       src="../../assets/Screenshot 2023-12-09 at 9.19.57 AM.png"
       class="large-image"
@@ -27,7 +27,7 @@
   </div>
   <div class="three container">
     <img src="../../assets/tiff.jpg" class="image" />
-    <div>
+    <div class="text">
       <h2>Hi, I'm Tiff!</h2>
 
       <p>
@@ -41,48 +41,48 @@
   </div>
 
   <div class="contact-form continer">
-    <img
-      src="../../assets/Screenshot 2023-11-10 at 4.26.38 AM.png"
-      class="image"
-    />
-    <div class="form-div">
 
+    <div class="form-div">
       <h2>Contact Us</h2>
       <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter your name">
-       
-          </div>
-          <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" formControlName="email"
-                  placeholder="Enter your email">
-     
-          </div>
-          <div class="mb-3">
-              <label for="message" class="form-label">Message</label>
-              <textarea class="form-control" id="message" formControlName="message" rows="3"
-                  placeholder="Enter your message"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Submit</button>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+            placeholder="Enter your name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            placeholder="Enter your email"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea
+            class="form-control"
+            id="message"
+            formControlName="message"
+            rows="3"
+            placeholder="Enter your message"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="contactForm.invalid"
+        >
+          Submit
+        </button>
       </form>
-  </div>
-    <!-- //TODO TIFF: Put a contact us form here -->
-  </div>
-</div>
-
-<!-- // TODO: Example for parallax scrolling -->
-
-<!-- <div id="container">
-  <div id="content">
-    <div style="width: 80%; margin-left: auto; margin-right: auto;">
-      Lots of placeholder text here so we ample vertical scroll to play with....
     </div>
   </div>
-</div> -->
-
-<!-- our parallax stuff -->
-<!-- <div appParallax [ratio]="-0.2" id="square"></div>
-<div appParallax [ratio]="0.5" id="circle"></div>
-<div appParallax [ratio]="0.9" id="rectangle"></div> -->
+</div>
