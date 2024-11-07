@@ -5,8 +5,8 @@
 
 .image {
   border-radius: 5em;
-  width: 40em;
-  height: 40em;
+  width: 35em;
+  height: 35em;
 }
 
 .no-borders {
@@ -38,10 +38,10 @@
 }
 
 .text {
-  margin-left: 1em;
+  margin-left: 6em;
   margin-right: 10em;
   margin-top: 6em;
-  width: 45%;
+  width: 30em;
 }
 
 .three {
@@ -52,6 +52,8 @@
 
 .large-text {
   font-size: 48px;
+  line-height: 80%;
+  font-weight: bold;
   margin-bottom: 1em;
 }
 
