@@ -3,11 +3,12 @@ import { PictureBoardComponent } from './picture-board/picture-board.component';
 import { ExploreComponent } from './explore/explore.component';
 import { ArtWorkComponent } from './art-work/art-work.component';
 import { AboutComponent } from './about/about.component';
+import { LoginComponent } from './login/login.component';
 
 
 export const routes: Routes = [
   { path: '', component: PictureBoardComponent },
-
+  { path: 'login', component: LoginComponent },
   { path: 'explore', component: ExploreComponent },
   { path: 'search', component: PictureBoardComponent },
   { path: 'about', component: AboutComponent },
