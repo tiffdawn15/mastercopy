@@ -57,3 +57,25 @@
   margin-bottom: 1em;
 }
 
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 2em auto;
+  padding: 2em;
+}
+
+.contact-form mat-form-field {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.contact-form button {
+  width: 20%;
+  padding: 1em;
+  font-size: 16px;
+  border-radius: 5em;
+}
+
