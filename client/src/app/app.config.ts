@@ -17,11 +17,9 @@ export const appConfig: ApplicationConfig = {
       provideHttpClient(withInterceptors([authHttpInterceptorFn])),
       // TODO: SETUP ENV FILES 
       provideAuth0({
-        domain: 'YOUR_AUTH0_DOMAIN',
-        clientId: 'YOUR_AUTH0_CLIENT_ID',
-        authorizationParams: {
-          redirect_uri: window.location.origin
-        }
+        domain: 'dev-lxvyzqp1stjc7ghi.us.auth0.com',
+        clientId: 'bXNMNP0KuYSq1uRhGf2MFbQ6upupFVCn',
+      
       })
   
   ],
