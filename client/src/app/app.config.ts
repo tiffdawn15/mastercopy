@@ -13,15 +13,13 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(),
     provideAnimationsAsync(),
+    provideAuth0(),
 
       provideHttpClient(withInterceptors([authHttpInterceptorFn])),
-      // TODO: SETUP ENV FILES 
       provideAuth0({
-        domain: 'YOUR_AUTH0_DOMAIN',
-        clientId: 'YOUR_AUTH0_CLIENT_ID',
-        authorizationParams: {
-          redirect_uri: window.location.origin
-        }
+        domain: '',
+        clientId: '',
+      
       })
   
   ],

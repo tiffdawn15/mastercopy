@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +19,7 @@ import { Router, RouterLink } from '@angular/router';
     MatFormFieldModule,
     FormsModule,
     RouterLink,
+    CommonModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
@@ -24,8 +27,15 @@ import { Router, RouterLink } from '@angular/router';
 export class HeaderComponent {
   @Output() searchEvent = new EventEmitter<string>();
   searchQuery: string = '';
+  login = false;
 
-  constructor(private imageService: ImageService, private router: Router) {}
+  constructor(
+    public auth: AuthService,
+    private imageService: ImageService,
+    private router: Router
+  ) {}
+
+  // TODO: Implement Login changes what the user sees
 
   onSearch() {
     if (this.searchQuery.trim()) {
