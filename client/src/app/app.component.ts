@@ -12,13 +12,12 @@ import { PictureBoardComponent } from './picture-board/picture-board.component';
     RouterModule, 
     RouterLink, 
     RouterLinkActive, 
-    
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Mumbos-Big-Jumbo';
+  title = 'Mastercopy';
   searchQuery: string = '';
 
   constructor() {}

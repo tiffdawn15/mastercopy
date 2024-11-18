@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { AuthService, provideAuth0 } from '@auth0/auth0-angular';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-      // TODO: SETUP ENV FILES 
-  
+  HeaderComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

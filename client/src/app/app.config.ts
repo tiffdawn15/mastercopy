@@ -13,12 +13,12 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(),
     provideAnimationsAsync(),
+    provideAuth0(),
 
       provideHttpClient(withInterceptors([authHttpInterceptorFn])),
-      // TODO: SETUP ENV FILES 
       provideAuth0({
-        domain: 'dev-lxvyzqp1stjc7ghi.us.auth0.com',
-        clientId: 'bXNMNP0KuYSq1uRhGf2MFbQ6upupFVCn',
+        domain: '',
+        clientId: '',
       
       })
   
