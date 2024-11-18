@@ -17,10 +17,12 @@ export const appConfig: ApplicationConfig = {
 
       provideHttpClient(withInterceptors([authHttpInterceptorFn])),
       provideAuth0({
-        domain: '',
-        clientId: '',
+        domain: 'dev-lxvyzqp1stjc7ghi.us.auth0.com',
+        clientId: 'bXNMNP0KuYSq1uRhGf2MFbQ6upupFVCn',
       
       })
+
+      
   
   ],
 };
