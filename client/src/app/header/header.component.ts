@@ -8,18 +8,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
+    CommonModule,
+    LoginComponent,
     MatChipsModule,
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
     RouterLink,
-    CommonModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',

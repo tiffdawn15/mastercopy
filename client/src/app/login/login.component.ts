@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService, provideAuth0 } from '@auth0/auth0-angular';
 import { HeaderComponent } from '../header/header.component';
 
@@ -12,8 +12,20 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  constructor(public auth: AuthService) {}
+  private auth = inject(AuthService);
+
+  constructor() {}
+
   loginWithRedirect() {
     this.auth.loginWithRedirect();
+  }
+
+
+  handleLogin(): void {
+    this.auth.loginWithRedirect({
+      appState: {
+        target: '/profile',
+      },
+    });
   }
 }

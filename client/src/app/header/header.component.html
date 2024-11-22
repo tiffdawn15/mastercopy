@@ -4,8 +4,7 @@
   <!-- // Header when not logged in -->
   <div *ngIf="!login">
     <div class="nav">
-      <!-- <button mat-fab routerLink="/login" (click)="auth.loginWithRedirect()">Login</button> -->
-      <button (click)="auth.loginWithRedirect()">Log in</button>
+      <app-login></app-login>
     </div>
     <div class="nav">
       <button mat-fab routerLink="/signup">Signup</button>
