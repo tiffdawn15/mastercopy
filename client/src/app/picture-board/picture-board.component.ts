@@ -4,6 +4,12 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, of, Observable, map, forkJoin } from 'rxjs';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpResponse,
+} from '@angular/common/http';
 
 export interface Photo {
   id: number;
@@ -36,66 +42,94 @@ export class PictureBoardComponent implements OnInit {
   };
 
   constructor(
+    private http: HttpClient,
     private imageService: ImageService,
     private route: ActivatedRoute,
     private router: Router
   ) {
     this.images = [];
-    // const page = {
-    //   page: this.pageIndex,
-    //   limit: this.pageSize,
-    // };
     this.getImages(this.page);
   }
 
   ngOnInit() {
+    this.getImages(this.page);
+
     this.route.queryParams.subscribe((params) => {
       this.searchQuery = params['q'] || '';
       this.onSearch(this.searchQuery, this.page);
     });
+  }
 
+  checkUrlStatus(url: string): Observable<boolean> {
+    return this.http
+      .get(url, { observe: 'response', responseType: 'text' })
+      .pipe(
+        map((response: HttpResponse<any>) => {
+          return response.status === 200;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          return of(false);
+        })
+      );
   }
 
   getImages(page: Pagination) {
-    this.images = [];
     if (this.searchQuery !== '') {
       this.onSearch(this.searchQuery, this.page);
       return;
     }
 
-    this.imageService.getArtWorks(page).subscribe((resp) => {
-      this.length = resp.pagination.total ? resp.pagination.total : 0;
-
-      resp.data.forEach((image: Image) => {
-        const id = image.id;
-        if (id) {
-          const url = `https://www.artic.edu/iiif/2/${image.image_id}/full/843,/0/default.jpg`;
-          const photo: Photo = {
-            id: id,
-            url: url,
-            title: image.title,
-          };
-          this.images.push(photo);
-        }
-      });
-    });
-  }
-
-  onSearch(term: string, page: Pagination) {
-    this.images = [];
-
     this.imageService
-      .searchArtWorks(term.toString(), page)
+      .getArtWorks(page)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Error fetching artworks:', error);
+          return of({ pagination: { total: 0 }, data: [] });
+        })
+      )
       .subscribe((resp) => {
-        this.images = [];
+        this.length = resp.pagination.total ? resp.pagination.total : 0;
 
-        resp.data.forEach((image: Image) => {
-          this.getImage(image.id);
+        const urlChecks = resp.data.map((image: Image) => {
+          const id = image.id;
+          if (id) {
+            const url = `https://www.artic.edu/iiif/2/${image.image_id}/full/843,/0/default.jpg`;
+            return this.checkUrlStatus(url).pipe(
+              map((isValid) => ({ isValid, image, url }))
+            );
+          }
+          return of(null);
+        });
+
+        forkJoin(urlChecks).subscribe((results) => {
+          results.forEach((result) => {
+            if (result && result.isValid) {
+              const photo: Photo = {
+                id: result.image.id,
+                url: result.url,
+                title: result.image.title,
+              };
+              this.images.push(photo);
+            } else if (result) {
+              console.error('Invalid URL:', result.url);
+            }
+          });
         });
       });
   }
 
+  onSearch(term: string, page: Pagination) {
+
+    this.imageService.searchArtWorks(term, page).subscribe((resp) => {
+
+      resp.data.forEach((image: Image) => {
+        this.getImage(image.id);
+      });
+    });
+  }
+
   handlePageEvent(e: PageEvent) {
+    this.images = [];
     this.length = e.length;
     this.page.page = e.pageIndex;
     this.page.limit = e.pageSize;
@@ -110,9 +144,39 @@ export class PictureBoardComponent implements OnInit {
     this.imageService.getArtwork(id.toString()).subscribe(
       (resp) => {
         const data: Image = resp.data;
-        const id = data.id;
-        if (id) {
+        if (data.id) {
           const url = `https://www.artic.edu/iiif/2/${data.image_id}/full/843,/0/default.jpg`;
+          const urlChecks = resp.data.map((image: Image) => {
+            const id = image.id;
+            if (id) {
+              return this.checkUrlStatus(url).pipe(
+                map((isValid) => ({ isValid, image, url }))
+              );
+            }
+            return of(null);
+          });
+
+          forkJoin(urlChecks).subscribe((results) => {
+            resp.forEach(
+              (result: {
+                isValid: any;
+                image: { id: any; title: any };
+                url: any;
+              }) => {
+                if (result && result.isValid) {
+                  const photo: Photo = {
+                    id: result.image.id,
+                    url: result.url,
+                    title: result.image.title,
+                  };
+                  this.images.push(photo);
+                } else if (result) {
+                  console.error('Invalid URL:', result.url);
+                }
+              }
+            );
+          });
+
           const photo: Photo = {
             id: id,
             url: url,
