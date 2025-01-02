@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpResponse, HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { Observable, map, catchError, of } from 'rxjs';
 
 export interface Photo {
   id: number;
@@ -24,7 +26,7 @@ export class PictureBoardComponent implements OnInit {
 
   images: Photo[] = [];
   length = 50;
-  pageSizeOptions = [25, 50, 75];
+  pageSizeOptions = [50, 75, 100];
 
   hidePageSize = false;
   showPageSizeOptions = true;
@@ -32,37 +34,33 @@ export class PictureBoardComponent implements OnInit {
   disabled = false;
   page = {
     page: 0,
-    limit: 25,
+    limit: 50,
   };
 
   constructor(
+    private http: HttpClient,
     private imageService: ImageService,
     private route: ActivatedRoute,
     private router: Router
   ) {
     this.images = [];
-    // const page = {
-    //   page: this.pageIndex,
-    //   limit: this.pageSize,
-    // };
+  
     this.getImages(this.page);
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.searchQuery = params['q'] || '';
-      this.onSearch(this.searchQuery, this.page);
+      this.searchQuery = params['searchQuery'];
+      if (this.searchQuery) {
+        this.onSearch(this.searchQuery, this.page);
+      } else {
+        this.getImages(this.page);
+      }
     });
-
   }
 
   getImages(page: Pagination) {
     this.images = [];
-    if (this.searchQuery !== '') {
-      this.onSearch(this.searchQuery, this.page);
-      return;
-    }
-
     this.imageService.getArtWorks(page).subscribe((resp) => {
       this.length = resp.pagination.total ? resp.pagination.total : 0;
 
@@ -82,9 +80,11 @@ export class PictureBoardComponent implements OnInit {
   }
 
   onSearch(term: string, page: Pagination) {
+    console.log('searching for:', term);
     this.images = [];
 
-    this.imageService
+    if(term){
+      this.imageService
       .searchArtWorks(term.toString(), page)
       .subscribe((resp) => {
         this.images = [];
@@ -93,17 +93,25 @@ export class PictureBoardComponent implements OnInit {
           this.getImage(image.id);
         });
       });
+    } else {
+      // this.getImages(page);
+    }
   }
 
   handlePageEvent(e: PageEvent) {
     this.length = e.length;
     this.page.page = e.pageIndex;
     this.page.limit = e.pageSize;
-    if (this.searchQuery !== '') {
-      this.onSearch(this.searchQuery, this.page);
-    } else {
-      this.getImages(this.page);
-    }
+
+    this.route.queryParams.subscribe((params) => {
+      this.searchQuery = params['searchQuery'];
+      console.log('searchQuery:', this.searchQuery);  
+      if (this.searchQuery) {
+        this.onSearch(this.searchQuery, this.page);
+      } else {
+        this.getImages(this.page);
+      }
+    });
   }
 
   getImage(id: number) {
@@ -129,5 +137,18 @@ export class PictureBoardComponent implements OnInit {
 
   onClick(image: Photo, id: number) {
     this.router.navigate([`/artwork/${id}`]);
+  }
+
+  checkUrlStatus(url: string): Observable<boolean> {
+    return this.http
+      .get(url, { observe: 'response', responseType: 'text' })
+      .pipe(
+        map((response: HttpResponse<any>) => {
+          return response.status === 200;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          return of(false);
+        })
+      );
   }
 }
