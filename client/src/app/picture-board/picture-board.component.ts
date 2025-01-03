@@ -4,12 +4,8 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, of, Observable, map, forkJoin } from 'rxjs';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { Observable, map, catchError, of } from 'rxjs';
 
 export interface Photo {
   id: number;
@@ -30,7 +26,7 @@ export class PictureBoardComponent implements OnInit {
 
   images: Photo[] = [];
   length = 50;
-  pageSizeOptions = [25, 50, 75];
+  pageSizeOptions = [50, 75, 100];
 
   hidePageSize = false;
   showPageSizeOptions = true;
@@ -38,7 +34,7 @@ export class PictureBoardComponent implements OnInit {
   disabled = false;
   page = {
     page: 0,
-    limit: 25,
+    limit: 50,
   };
 
   constructor(
@@ -48,6 +44,7 @@ export class PictureBoardComponent implements OnInit {
     private router: Router
   ) {
     this.images = [];
+  
     this.getImages(this.page);
   }
 
@@ -55,68 +52,36 @@ export class PictureBoardComponent implements OnInit {
     this.getImages(this.page);
 
     this.route.queryParams.subscribe((params) => {
-      this.searchQuery = params['q'] || '';
-      this.onSearch(this.searchQuery, this.page);
+      this.searchQuery = params['q'];
+      if (this.searchQuery) {
+        this.onSearch(this.searchQuery, this.page);
+      } else {
+        this.getImages(this.page);
+      }
     });
   }
 
-  checkUrlStatus(url: string): Observable<boolean> {
-    return this.http
-      .get(url, { observe: 'response', responseType: 'text' })
-      .pipe(
-        map((response: HttpResponse<any>) => {
-          return response.status === 200;
-        }),
-        catchError((error: HttpErrorResponse) => {
-          return of(false);
-        })
-      );
-  }
-
   getImages(page: Pagination) {
-    if (this.searchQuery !== '') {
-      this.onSearch(this.searchQuery, this.page);
-      return;
-    }
+    this.images = [];
+    this.imageService.getArtWorks(page).subscribe((resp) => {
+      this.length = resp.pagination.total ? resp.pagination.total : 0;
 
-    this.imageService
-      .getArtWorks(page)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Error fetching artworks:', error);
-          return of({ pagination: { total: 0 }, data: [] });
-        })
-      )
-      .subscribe((resp) => {
-        this.length = resp.pagination.total ? resp.pagination.total : 0;
-
-        const urlChecks = resp.data.map((image: Image) => {
-          const id = image.id;
-          if (id) {
-            const url = `https://www.artic.edu/iiif/2/${image.image_id}/full/843,/0/default.jpg`;
-            return this.checkUrlStatus(url).pipe(
-              map((isValid) => ({ isValid, image, url }))
-            );
-          }
-          return of(null);
-        });
-
-        forkJoin(urlChecks).subscribe((results) => {
-          results.forEach((result) => {
-            if (result && result.isValid) {
-              const photo: Photo = {
-                id: result.image.id,
-                url: result.url,
-                title: result.image.title,
-              };
-              this.images.push(photo);
-            } else if (result) {
-              console.error('Invalid URL:', result.url);
-            }
-          });
-        });
+      resp.data.forEach((image: Image) => {
+        const id = image.id;
+        if (id) {
+          const url = `https://www.artic.edu/iiif/2/${image.image_id}/full/843,/0/default.jpg`;
+          const photo: Photo = {
+            id: id,
+            url: url,
+            title: image.title,
+          };
+          this.images.push(photo);
+        }
       });
+    });
   }
+
+
 
   onSearch(term: string, page: Pagination) {
 
@@ -133,11 +98,15 @@ export class PictureBoardComponent implements OnInit {
     this.length = e.length;
     this.page.page = e.pageIndex;
     this.page.limit = e.pageSize;
-    if (this.searchQuery !== '') {
-      this.onSearch(this.searchQuery, this.page);
-    } else {
-      this.getImages(this.page);
-    }
+
+    this.route.queryParams.subscribe((params) => {
+      this.searchQuery = params['q'];
+      if (this.searchQuery) {
+        this.onSearch(this.searchQuery, this.page);
+      } else {
+        this.getImages(this.page);
+      }
+    });
   }
 
   getImage(id: number) {
@@ -156,26 +125,6 @@ export class PictureBoardComponent implements OnInit {
             return of(null);
           });
 
-          forkJoin(urlChecks).subscribe((results) => {
-            resp.forEach(
-              (result: {
-                isValid: any;
-                image: { id: any; title: any };
-                url: any;
-              }) => {
-                if (result && result.isValid) {
-                  const photo: Photo = {
-                    id: result.image.id,
-                    url: result.url,
-                    title: result.image.title,
-                  };
-                  this.images.push(photo);
-                } else if (result) {
-                  console.error('Invalid URL:', result.url);
-                }
-              }
-            );
-          });
 
           const photo: Photo = {
             id: id,
@@ -193,5 +142,18 @@ export class PictureBoardComponent implements OnInit {
 
   onClick(image: Photo, id: number) {
     this.router.navigate([`/artwork/${id}`]);
+  }
+
+  checkUrlStatus(url: string): Observable<boolean> {
+    return this.http
+      .get(url, { observe: 'response', responseType: 'text' })
+      .pipe(
+        map((response: HttpResponse<any>) => {
+          return response.status === 200;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          return of(false);
+        })
+      );
   }
 }
