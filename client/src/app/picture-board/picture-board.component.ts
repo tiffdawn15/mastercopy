@@ -49,6 +49,8 @@ export class PictureBoardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getImages(this.page);
+
     this.route.queryParams.subscribe((params) => {
       this.searchQuery = params['q'];
       if (this.searchQuery) {
@@ -79,22 +81,20 @@ export class PictureBoardComponent implements OnInit {
     });
   }
 
-  onSearch(term: string, page: Pagination) {
-    this.images = [];
-    if(term){
-      this.imageService
-      .searchArtWorks(term.toString(), page)
-      .subscribe((resp) => {
-        this.images = [];
 
-        resp.data.forEach((image: Image) => {
-          this.getImage(image.id);
-        });
+
+  onSearch(term: string, page: Pagination) {
+
+    this.imageService.searchArtWorks(term, page).subscribe((resp) => {
+
+      resp.data.forEach((image: Image) => {
+        this.getImage(image.id);
       });
-    } 
+    });
   }
 
   handlePageEvent(e: PageEvent) {
+    this.images = [];
     this.length = e.length;
     this.page.page = e.pageIndex;
     this.page.limit = e.pageSize;
@@ -113,9 +113,19 @@ export class PictureBoardComponent implements OnInit {
     this.imageService.getArtwork(id.toString()).subscribe(
       (resp) => {
         const data: Image = resp.data;
-        const id = data.id;
-        if (id) {
+        if (data.id) {
           const url = `https://www.artic.edu/iiif/2/${data.image_id}/full/843,/0/default.jpg`;
+          const urlChecks = resp.data.map((image: Image) => {
+            const id = image.id;
+            if (id) {
+              return this.checkUrlStatus(url).pipe(
+                map((isValid) => ({ isValid, image, url }))
+              );
+            }
+            return of(null);
+          });
+
+
           const photo: Photo = {
             id: id,
             url: url,
