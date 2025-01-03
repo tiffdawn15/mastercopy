@@ -91,9 +91,7 @@ export class PictureBoardComponent implements OnInit {
           this.getImage(image.id);
         });
       });
-    } else {
-      // this.getImages(page);
-    }
+    } 
   }
 
   handlePageEvent(e: PageEvent) {
@@ -102,7 +100,7 @@ export class PictureBoardComponent implements OnInit {
     this.page.limit = e.pageSize;
 
     this.route.queryParams.subscribe((params) => {
-      this.searchQuery = params['searchQuery'];
+      this.searchQuery = params['q'];
       if (this.searchQuery) {
         this.onSearch(this.searchQuery, this.page);
       } else {
