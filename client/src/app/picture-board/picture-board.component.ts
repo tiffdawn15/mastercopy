@@ -50,7 +50,7 @@ export class PictureBoardComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.searchQuery = params['searchQuery'];
+      this.searchQuery = params['q'];
       if (this.searchQuery) {
         this.onSearch(this.searchQuery, this.page);
       } else {
@@ -80,9 +80,7 @@ export class PictureBoardComponent implements OnInit {
   }
 
   onSearch(term: string, page: Pagination) {
-    console.log('searching for:', term);
     this.images = [];
-
     if(term){
       this.imageService
       .searchArtWorks(term.toString(), page)
@@ -105,7 +103,6 @@ export class PictureBoardComponent implements OnInit {
 
     this.route.queryParams.subscribe((params) => {
       this.searchQuery = params['searchQuery'];
-      console.log('searchQuery:', this.searchQuery);  
       if (this.searchQuery) {
         this.onSearch(this.searchQuery, this.page);
       } else {
