@@ -4,7 +4,11 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpResponse, HttpErrorResponse, HttpClient } from '@angular/common/http';
+import {
+  HttpResponse,
+  HttpErrorResponse,
+  HttpClient,
+} from '@angular/common/http';
 import { Observable, map, catchError, of } from 'rxjs';
 
 export interface Photo {
@@ -44,7 +48,7 @@ export class PictureBoardComponent implements OnInit {
     private router: Router
   ) {
     this.images = [];
-  
+
     this.getImages(this.page);
   }
 
@@ -81,12 +85,8 @@ export class PictureBoardComponent implements OnInit {
     });
   }
 
-
-
   onSearch(term: string, page: Pagination) {
-
     this.imageService.searchArtWorks(term, page).subscribe((resp) => {
-
       resp.data.forEach((image: Image) => {
         this.getImage(image.id);
       });
@@ -124,7 +124,6 @@ export class PictureBoardComponent implements OnInit {
             }
             return of(null);
           });
-
 
           const photo: Photo = {
             id: id,
