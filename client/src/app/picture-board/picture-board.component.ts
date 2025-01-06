@@ -86,6 +86,7 @@ export class PictureBoardComponent implements OnInit {
   }
 
   onSearch(term: string, page: Pagination) {
+    this.images = [];
     this.imageService.searchArtWorks(term, page).subscribe((resp) => {
       resp.data.forEach((image: Image) => {
         this.getImage(image.id);
@@ -115,15 +116,16 @@ export class PictureBoardComponent implements OnInit {
         const data: Image = resp.data;
         if (data.id) {
           const url = `https://www.artic.edu/iiif/2/${data.image_id}/full/843,/0/default.jpg`;
-          const urlChecks = resp.data.map((image: Image) => {
-            const id = image.id;
-            if (id) {
-              return this.checkUrlStatus(url).pipe(
-                map((isValid) => ({ isValid, image, url }))
-              );
-            }
-            return of(null);
-          });
+          // TODO TIFF: FIgure out another way to check url this is the bug 
+          // const urlChecks = resp.data.map((image: Image) => {
+          //   const id = image.id;
+          //   if (id) {
+          //     return this.checkUrlStatus(url).pipe(
+          //       map((isValid) => ({ isValid, image, url }))
+          //     );
+          //   }
+          //   return of(null);
+          // });
 
           const photo: Photo = {
             id: id,
