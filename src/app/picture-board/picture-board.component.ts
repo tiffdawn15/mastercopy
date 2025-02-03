@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ImageService, Image, Pagination } from './../image.service';
-import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../header/header.component';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit } from "@angular/core";
+import { ImageService, Image, Pagination } from "./../image.service";
+import { CommonModule } from "@angular/common";
+import { HeaderComponent } from "../header/header.component";
+import { MatPaginatorModule, PageEvent } from "@angular/material/paginator";
+import { ActivatedRoute, Router } from "@angular/router";
 import {
   HttpResponse,
   HttpErrorResponse,
   HttpClient,
-} from '@angular/common/http';
-import { Observable, map, catchError, of } from 'rxjs';
+} from "@angular/common/http";
+import { Observable, map, catchError, of } from "rxjs";
 
 export interface Photo {
   id: number;
@@ -18,15 +18,15 @@ export interface Photo {
 }
 
 @Component({
-  selector: 'app-picture-board',
+  selector: "app-picture-board",
   standalone: true,
 
   imports: [CommonModule, HeaderComponent, MatPaginatorModule],
-  templateUrl: './picture-board.component.html',
-  styleUrl: './picture-board.component.css',
+  templateUrl: "./picture-board.component.html",
+  styleUrl: "./picture-board.component.css",
 })
 export class PictureBoardComponent implements OnInit {
-  @Input() searchQuery: string = '';
+  @Input() searchQuery: string = "";
 
   images: Photo[] = [];
   length = 50;
@@ -56,7 +56,7 @@ export class PictureBoardComponent implements OnInit {
     this.getImages(this.page);
 
     this.route.queryParams.subscribe((params) => {
-      this.searchQuery = params['q'];
+      this.searchQuery = params["q"];
       if (this.searchQuery) {
         this.onSearch(this.searchQuery, this.page);
       } else {
@@ -71,15 +71,19 @@ export class PictureBoardComponent implements OnInit {
       this.length = resp.pagination.total ? resp.pagination.total : 0;
 
       resp.data.forEach((image: Image) => {
-        const id = image.id;
-        if (id) {
+        if (image.image_id) {
           const url = `https://www.artic.edu/iiif/2/${image.image_id}/full/843,/0/default.jpg`;
-          const photo: Photo = {
-            id: id,
-            url: url,
-            title: image.title,
-          };
-          this.images.push(photo);
+
+          this.checkUrlStatus(url).subscribe((isValid) => {
+            if (isValid) {
+              const photo: Photo = {
+                id: image.image_id,
+                url: url,
+                title: image.title,
+              };
+              this.images.push(photo);
+            }
+          });
         }
       });
     });
@@ -101,7 +105,7 @@ export class PictureBoardComponent implements OnInit {
     this.page.limit = e.pageSize;
 
     this.route.queryParams.subscribe((params) => {
-      this.searchQuery = params['q'];
+      this.searchQuery = params["q"];
       if (this.searchQuery) {
         this.onSearch(this.searchQuery, this.page);
       } else {
@@ -114,18 +118,8 @@ export class PictureBoardComponent implements OnInit {
     this.imageService.getArtwork(id.toString()).subscribe(
       (resp) => {
         const data: Image = resp.data;
-        if (data.id) {
+        if (data.image_id) {
           const url = `https://www.artic.edu/iiif/2/${data.image_id}/full/843,/0/default.jpg`;
-          // TODO TIFF: FIgure out another way to check url this is the bug 
-          // const urlChecks = resp.data.map((image: Image) => {
-          //   const id = image.id;
-          //   if (id) {
-          //     return this.checkUrlStatus(url).pipe(
-          //       map((isValid) => ({ isValid, image, url }))
-          //     );
-          //   }
-          //   return of(null);
-          // });
 
           const photo: Photo = {
             id: id,
@@ -136,7 +130,7 @@ export class PictureBoardComponent implements OnInit {
         }
       },
       (error) => {
-        console.error('Error', error);
+        console.error("Error", error);
       }
     );
   }
@@ -147,7 +141,7 @@ export class PictureBoardComponent implements OnInit {
 
   checkUrlStatus(url: string): Observable<boolean> {
     return this.http
-      .get(url, { observe: 'response', responseType: 'text' })
+      .get(url, { observe: "response", responseType: "text" })
       .pipe(
         map((response: HttpResponse<any>) => {
           return response.status === 200;
