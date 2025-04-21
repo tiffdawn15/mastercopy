@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AboutComponent } from './about.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // Import HttpClientTestingModule
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
@@ -8,10 +10,20 @@ describe('AboutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AboutComponent]
-    })
-    .compileComponents();
-    
+      imports: [AboutComponent, 
+        HttpClientTestingModule
+      ], 
+      providers: [
+        {
+          provide: ActivatedRoute, 
+          useValue: {
+            params: of({id: 1}), 
+            queryParams: of({q: 'test'}),
+          }
+        }
+      ]
+    }).compileComponents();
+
     fixture = TestBed.createComponent(AboutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +32,6 @@ describe('AboutComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
 });

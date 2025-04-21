@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
 import { HeaderComponent } from './header/header.component';
 import { PictureBoardComponent } from './picture-board/picture-board.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-root',

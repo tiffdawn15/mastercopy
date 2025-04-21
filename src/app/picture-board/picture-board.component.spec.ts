@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-fdescribe('PictureBoardComponent', () => {
+describe('PictureBoardComponent', () => {
   let component: PictureBoardComponent;
   let fixture: ComponentFixture<PictureBoardComponent>;
 
@@ -87,35 +87,5 @@ fdescribe('PictureBoardComponent', () => {
     expect(compiled.querySelectorAll('.image-container').length).toBe(1);
   });
 
-  // TODO TIFF: Update these unit tests
-
-  // it('should handle errors gracefully', () => {
-  //   // Assuming handleError is a method that handles errors
-  //   spyOn(component, 'handleError');
-  //   // Simulate an error
-  //   component.handleError(new Error('Test error'));
-  //   expect(component.handleError).toHaveBeenCalledWith(jasmine.any(Error));
-  //   // Add more expectations based on how errors are handled in the component
-  // });
-
-  // it('should handle user interactions', () => {
-  //   // Assuming there's a method to handle user interactions like clicks
-  //   spyOn(component, 'onPictureClick');
-  //   const pictureElement = fixture.debugElement.query(By.css('.picture-item'));
-  //   pictureElement.triggerEventHandler('click', null);
-  //   expect(component.onPictureClick).toHaveBeenCalled();
-  // });
-
-  // it('should conditionally render elements', () => {
-  //   // Assuming there's a condition that controls the rendering of an element
-  //   component.showElement = true;
-  //   fixture.detectChanges();
-  //   let element = fixture.debugElement.query(By.css('.conditional-element'));
-  //   expect(element).toBeTruthy();
-
-  //   component.showElement = false;
-  //   fixture.detectChanges();
-  //   element = fixture.debugElement.query(By.css('.conditional-element'));
-  //   expect(element).toBeFalsy();
-  // });
+  
 });
