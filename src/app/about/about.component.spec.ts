@@ -3,6 +3,7 @@ import { AboutComponent } from './about.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing'; // Import HttpClientTestingModule
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
@@ -11,6 +12,7 @@ describe('AboutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AboutComponent, 
+        BrowserAnimationsModule,
         HttpClientTestingModule
       ], 
       providers: [
