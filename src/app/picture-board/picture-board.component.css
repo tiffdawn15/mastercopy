@@ -16,3 +16,10 @@
 .title {
     padding: 1em;
 }
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
