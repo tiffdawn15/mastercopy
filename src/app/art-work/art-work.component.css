@@ -39,3 +39,10 @@
     justify-content: center;
     margin: 3em;
 }
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full page height */
+  }

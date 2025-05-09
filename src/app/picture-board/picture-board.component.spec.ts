@@ -1,13 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { HttpClientModule } from "@angular/common/http";
+import { RouterModule } from "@angular/router";
+import { By } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { Photo, PictureBoardComponent } from './picture-board.component';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { By } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('PictureBoardComponent', () => {
+import { Photo, PictureBoardComponent } from "./picture-board.component";
+
+describe("PictureBoardComponent", () => {
   let component: PictureBoardComponent;
   let fixture: ComponentFixture<PictureBoardComponent>;
 
@@ -27,15 +28,15 @@ describe('PictureBoardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 
-  it('should handle page events', () => {
-    spyOn(component, 'handlePageEvent');
+  it("should handle page events", () => {
+    spyOn(component, "handlePageEvent");
 
     const paginator = fixture.debugElement.query(
-      By.css('mat-paginator')
+      By.css("mat-paginator")
     ).componentInstance;
     paginator.page.emit({ pageIndex: 1, pageSize: 10, length: 50 });
 
@@ -48,9 +49,9 @@ describe('PictureBoardComponent', () => {
     });
   });
 
-  it('should have correct initial paginator settings', () => {
+  it("should have correct initial paginator settings", () => {
     const paginator = fixture.debugElement.query(
-      By.css('mat-paginator')
+      By.css("mat-paginator")
     ).componentInstance;
 
     expect(paginator.length).toBe(component.length);
@@ -64,8 +65,8 @@ describe('PictureBoardComponent', () => {
     expect(paginator.pageIndex).toBe(component.page.page);
   });
 
-  it('should get Images', () => {
-    spyOn(component, 'getImages').and.callThrough();
+  it("should get Images", () => {
+    spyOn(component, "getImages").and.callThrough();
     const page = {
       page: 0,
       limit: 25,
@@ -74,18 +75,16 @@ describe('PictureBoardComponent', () => {
     expect(component.getImages).toHaveBeenCalled();
   });
 
-  it('should render data correctly', () => {
-    // Assuming data is stored in a property called items
+  it("should render data correctly", () => {
     const photo: Photo = {
       id: 0,
-      url: 'url',
-      title: 'title',
+      imageId: 0,
+      url: "url",
+      title: "title",
     };
     component.images = [photo];
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelectorAll('.image-container').length).toBe(1);
+    expect(compiled.querySelectorAll(".image-container").length).toBe(1);
   });
-
-  
 });
