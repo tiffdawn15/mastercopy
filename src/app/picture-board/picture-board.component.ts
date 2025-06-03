@@ -130,7 +130,6 @@ export class PictureBoardComponent implements OnInit {
   getImage(id: number) {
     this.imageService.getArtwork(id.toString()).subscribe(
       (resp) => {
-        console.log('resp', resp);
         const data: Image = resp.data;
         if (data.image_id) {
           const url = `https://www.artic.edu/iiif/2/${data.image_id}/full/843,/0/default.jpg`;
