@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
 export interface Pagination {
+  search?: string;
   page: number;
   limit: number;
   total?: number;
@@ -26,15 +27,10 @@ export interface ImageData {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ImageService {
   constructor(private http: HttpClient) {}
-
-  getArtWorks(page: Pagination) {
-    let getArtworks = `https://api.artic.edu/api/v1/artworks?page=${page.page}&limit=${page.limit}`;
-    return this.http.get<ImageObject>(getArtworks);
-  }
 
   searchArtWorks(term: string, page: Pagination) {
     let searchUrl = `https://api.artic.edu/api/v1/artworks/search?q=${term}?page=${page.page}&limit=${page.limit}`;
@@ -46,5 +42,9 @@ export class ImageService {
     return this.http.get<any>(artworkUrl);
   }
 
-
+  getAllArtworks(page: Pagination) {
+    // TODO: Setup env file for this URL
+    const url = `https://draft-ep3o.onrender.com/artworks/all?page=${page.page}&limit=${page.limit}`;
+    return this.http.get<ImageObject>(url);
+  }
 }

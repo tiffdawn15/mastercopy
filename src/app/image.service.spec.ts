@@ -3,8 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { ImageService } from './image.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
-
 describe('ImageService', () => {
   let service: ImageService;
 

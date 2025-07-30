@@ -13,7 +13,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [
     CommonModule,
-    HeaderComponent,
     MatIconModule,
     MatProgressSpinnerModule, 
   ],
@@ -40,9 +39,7 @@ export class ArtWorkComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    // this.id = this.route.snapshot.paramMap.get('id');
     this.route.paramMap.subscribe((paramMap) => {
-      console.log('paramMap', paramMap);
       this.id = paramMap.get('id')!;
       this.getImage();
     });
@@ -53,9 +50,7 @@ export class ArtWorkComponent {
   getImage() {
     this.isLoading = true;
     this.imageService.getArtwork(this.id).subscribe((resp) => {
-      console.log(resp);
       this.url = `https://www.artic.edu/iiif/2/${resp.data.image_id}/full/843,/0/default.jpg`;
-      console.log(this.url);
       this.title = resp.data.title;
       this.artist = resp.data.artist_title;
       this.artist_display = resp.data.artist_display;

@@ -26,7 +26,6 @@ export interface Photo {
   standalone: true,
   imports: [
     CommonModule,
-    HeaderComponent,
     MatProgressSpinnerModule,
     MatPaginatorModule,
     MatSnackBarModule,
@@ -46,7 +45,7 @@ export class PictureBoardComponent implements OnInit {
   showFirstLastButtons = true;
   disabled = false;
   page = {
-    page: 0,
+    page: 1,
     limit: 50,
   };
   paginator: any;
@@ -77,7 +76,7 @@ export class PictureBoardComponent implements OnInit {
 
   getImages(page: Pagination) {
     this.images = [];
-    this.imageService.getArtWorks(page).subscribe((resp) => {
+    this.imageService.getAllArtworks(page).subscribe((resp) => {
       this.length = resp.pagination.total ? resp.pagination.total : 0;
 
       resp.data.forEach((image: Image) => {
@@ -150,7 +149,6 @@ export class PictureBoardComponent implements OnInit {
   }
 
   onClick(image: Photo, id: number) {
-    console.log('image', image);
     this.router.navigate([`/artwork/${id}`]);
   }
 

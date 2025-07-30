@@ -31,7 +31,7 @@ Mastercopy is inspired by the artistic practice of creating "mastercopies" of fa
 ## Installation
 
 1. Clone the repository:
-   `bash git clone https://github.com/your-username/mastercopy.git`
+   ` git clone https://github.com/your-username/mastercopy.git`
 2. Navigate to client directory:
    `cd mastercopy/client`
 3. Install dependencies:
