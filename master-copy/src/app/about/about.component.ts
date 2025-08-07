@@ -6,11 +6,10 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormsModule } 
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-about',
-  standalone: true,
-  imports: [CommonModule, MatFormField, MatLabel, ReactiveFormsModule, FormsModule],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.scss',
+    selector: 'app-about',
+    imports: [CommonModule, MatFormField, MatLabel, ReactiveFormsModule, FormsModule],
+    templateUrl: './about.component.html',
+    styleUrl: './about.component.scss'
 })
 export class AboutComponent {
   contactForm = new FormGroup({

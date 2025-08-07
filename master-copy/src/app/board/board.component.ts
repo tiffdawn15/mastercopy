@@ -10,13 +10,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 @Component({
-  selector: 'app-board',
-  standalone: true,
-  imports: [MatPaginator,
-    MatProgressSpinnerModule
-  ],
-  templateUrl: './board.component.html',
-  styleUrl: './board.component.scss'
+    selector: 'app-board',
+    imports: [MatPaginator,
+        MatProgressSpinnerModule
+    ],
+    templateUrl: './board.component.html',
+    styleUrl: './board.component.scss'
 })
 export class BoardComponent {
   @Input() searchQuery: string = "";

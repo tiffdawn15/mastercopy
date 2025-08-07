@@ -3,16 +3,15 @@ import { Router, RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from
 import { HeaderComponent } from './header/header.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, 
-    HeaderComponent,
-    RouterModule, 
-    RouterLink, 
-    RouterLinkActive, 
-  ],
-  templateUrl: './app.component.scss',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet,
+        HeaderComponent,
+        RouterModule,
+        RouterLink,
+        RouterLinkActive,
+    ],
+    templateUrl: './app.component.scss',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'Mumbos-Big-Jumbo';

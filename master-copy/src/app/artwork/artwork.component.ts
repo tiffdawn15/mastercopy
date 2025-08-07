@@ -4,11 +4,10 @@ import { ImageService } from '../image.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-artwork',
-  standalone: true,
-  imports: [],
-  templateUrl: './artwork.component.html',
-  styleUrl: './artwork.component.scss'
+    selector: 'app-artwork',
+    imports: [],
+    templateUrl: './artwork.component.html',
+    styleUrl: './artwork.component.scss'
 })
 export class ArtworkComponent {
   id = '';
