@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 @Component({
     selector: 'app-about',
     imports: [CommonModule, MatFormField, MatLabel, ReactiveFormsModule, FormsModule],
+    standalone: true,
     templateUrl: './about.component.html',
     styleUrl: './about.component.scss'
 })

@@ -6,6 +6,7 @@ import { ImageService } from '../image.service';
 @Component({
     selector: 'app-header',
     imports: [],
+    standalone: true,
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
 })

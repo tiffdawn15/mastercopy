@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
         RouterLink,
         RouterLinkActive,
     ],
+    standalone: true, 
     templateUrl: './app.component.scss',
     styleUrl: './app.component.scss'
 })

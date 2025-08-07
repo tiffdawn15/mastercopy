@@ -14,6 +14,7 @@ import { PageEvent, MatPaginator } from '@angular/material/paginator';
     imports: [MatPaginator,
         MatProgressSpinnerModule
     ],
+    standalone: true, 
     templateUrl: './board.component.html',
     styleUrl: './board.component.scss'
 })

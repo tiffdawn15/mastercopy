@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-artwork',
     imports: [],
+    standalone: true,
     templateUrl: './artwork.component.html',
     styleUrl: './artwork.component.scss'
 })
