@@ -1,44 +1,25 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import { ParallaxDirective } from '../parallax.directive';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+
 import { ContactService } from '../contact.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [
-    CommonModule,
-    HeaderComponent,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, MatFormField, MatLabel, ReactiveFormsModule, FormsModule],
   templateUrl: './about.component.html',
-  styleUrl: './about.component.css',
+  styleUrl: './about.component.scss',
 })
 export class AboutComponent {
   contactForm = new FormGroup({
-    name: new FormControl('', Validators.min(3)),
-    email: new FormControl('', Validators.min(3)),
-    message: new FormControl('', Validators.min(3)),
+    name: new FormControl('', Validators.minLength(3)),
+    email: new FormControl('', Validators.minLength(3)),
+    message: new FormControl('', Validators.minLength(3)),
   });
 
   constructor(private contactService: ContactService) {}
-
-  onSearch(term: string) {
-    console.log(term);
-
-    // TODO: Implement this function
-  }
 
   onSubmit() {
     const from = {

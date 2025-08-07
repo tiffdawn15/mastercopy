@@ -1,40 +1,24 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { HeaderComponent } from "../header/header.component";
-import { ActivatedRoute, Router } from "@angular/router";
-import {
-  HttpResponse,
-  HttpErrorResponse,
-  HttpClient,
-} from "@angular/common/http";
-import { Observable, map, catchError, of } from "rxjs";
-
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import { MatPaginatorModule, PageEvent } from "@angular/material/paginator";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner"; // Import spinner module
-import { ImageService, Image, Pagination } from "./../image.service";
-
-export interface Photo {
-  id: number;
-  imageId: number;
-  url: string;
-  title: string;
-}
-
+import { Photo } from './../../../../src/app/picture-board/picture-board.component';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { Observable, map, catchError, of } from 'rxjs';
+import { ImageService, Pagination } from '../image.service';
+import { Image,  } from '../image.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { PageEvent, MatPaginator } from '@angular/material/paginator';
 @Component({
-  selector: "app-picture-board",
+  selector: 'app-board',
   standalone: true,
-  imports: [
-    CommonModule,
-    HeaderComponent,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatSnackBarModule,
+  imports: [MatPaginator,
+    MatProgressSpinnerModule
   ],
-  templateUrl: "./picture-board.component.html",
-  styleUrl: "./picture-board.component.css",
+  templateUrl: './board.component.html',
+  styleUrl: './board.component.scss'
 })
-export class PictureBoardComponent implements OnInit {
+export class BoardComponent {
   @Input() searchQuery: string = "";
 
   images: Photo[] = [];
@@ -150,7 +134,8 @@ export class PictureBoardComponent implements OnInit {
   }
 
   onClick(image: Photo, id: number) {
-          this.router.navigate([`/artwork/${id}`]);
+    console.log('image', image);
+    this.router.navigate([`/artwork/${id}`]);
   }
 
   checkUrlStatus(url: string): Observable<boolean> {

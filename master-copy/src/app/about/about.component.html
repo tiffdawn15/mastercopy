@@ -1,0 +1,87 @@
+<div class="wrapper">
+    <div class="one container">
+      <div class="text">
+        <h2 class="large-text">Art meets History...</h2>
+  
+        <p>
+          MasterCopy is a work of love created by Tiffany Messer to provide museum
+          catalogues to everyone. Investigate works in art history movements; your
+          favorite artist; or just click around the catalogue. All artworks are
+          provided by the Chicago Institute of Art’s open source api and all
+          information belongs to them.
+        </p>
+      </div>
+      <img
+        src="../../assets/cassat1.png"
+        class="image"
+      />
+    </div>
+  
+    <div class="no-borders">
+      <img
+        src="../../assets/Screenshot 2024-11-13 at 11.14.18 AM.png"
+        class="large-image"
+      />
+    </div>
+    <div class="three container">
+      <img src="../../assets/tiff.jpg" class="image" />
+      <div class="text">
+        <h2 class="large-text">Hi, I'm Tiff!</h2>
+  
+        <p>
+          I’m a software engineer and a self taught artistes. I’m on my self
+          taught artist journey and I am currently doing a lot of master copies in
+          order to create my own unique voice. Mastercopy is an effort that allows
+          me to have access to more quality images and to share my love of art
+          history with anyone interested.
+        </p>
+      </div>
+    </div>
+  
+    <div class="contact-form continer">
+      <div class="form-div">
+        <h2 class="large-text">Send me a message!</h2>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="mb-3" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="name"
+              placeholder="Enter your name"
+            />
+          </mat-form-field>
+  
+          <mat-form-field  appearance="fill">
+            <mat-label>Email address</mat-label>
+            <input
+              matInput
+              type="email"
+              formControlName="email"
+              placeholder="Enter your email"
+            />
+          </mat-form-field>
+  
+          <mat-form-field class="mb-3" appearance="fill">
+            <mat-label>Message</mat-label>
+            <textarea
+              matInput
+              formControlName="message"
+              rows="3"
+              placeholder="Enter your message"
+            ></textarea>
+          </mat-form-field>
+  
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="contactForm.invalid"
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
