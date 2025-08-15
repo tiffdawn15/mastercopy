@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterModule,  } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { RouterOutlet } from '@angular/router';
+import { BoardComponent } from './board/board.component';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet,
-        HeaderComponent,
-        RouterModule,
-        RouterLink,
-        RouterLinkActive,
+    imports: [
+      RouterOutlet, 
+    HeaderComponent, 
+    RouterModule, 
+    RouterLink, 
+    RouterLinkActive, 
     ],
     standalone: true, 
     templateUrl: './app.component.scss',

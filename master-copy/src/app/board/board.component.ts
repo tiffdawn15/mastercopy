@@ -1,25 +1,44 @@
 import { Photo } from './../../../../src/app/picture-board/picture-board.component';
-import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpResponse,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { Observable, map, catchError, of } from 'rxjs';
 import { ImageService, Pagination } from '../image.service';
-import { Image,  } from '../image.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { PageEvent, MatPaginator } from '@angular/material/paginator';
+import { Image } from '../image.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import {
+  PageEvent,
+  MatPaginator,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
+import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { HeaderComponent } from '../header/header.component';
+import { BidiModule } from '@angular/cdk/bidi';
+
 @Component({
-    selector: 'app-board',
-    imports: [MatPaginator,
-        MatProgressSpinnerModule
-    ],
-    standalone: true, 
-    templateUrl: './board.component.html',
-    styleUrl: './board.component.scss'
+  selector: 'app-board',
+  imports: [
+    CommonModule,
+    BidiModule,
+    HeaderComponent,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
+  ],
+  standalone: true,
+  templateUrl: './board.component.html',
+  styleUrl: './board.component.scss',
 })
 export class BoardComponent {
-  @Input() searchQuery: string = "";
+  @Input() searchQuery: string = '';
 
   images: Photo[] = [];
   length = 50;
@@ -50,7 +69,7 @@ export class BoardComponent {
     this.getImages(this.page);
 
     this.route.queryParams.subscribe((params) => {
-      this.searchQuery = params["q"];
+      this.searchQuery = params['q'];
       if (this.searchQuery) {
         this.onSearch(this.searchQuery, this.page);
       } else {
@@ -102,7 +121,7 @@ export class BoardComponent {
     this.page.limit = e.pageSize;
 
     this.route.queryParams.subscribe((params) => {
-      this.searchQuery = params["q"];
+      this.searchQuery = params['q'];
       if (this.searchQuery) {
         this.onSearch(this.searchQuery, this.page);
       } else {
@@ -128,7 +147,7 @@ export class BoardComponent {
         }
       },
       (error) => {
-       this.handleError(error);
+        this.handleError(error);
       }
     );
   }
@@ -140,7 +159,7 @@ export class BoardComponent {
 
   checkUrlStatus(url: string): Observable<boolean> {
     return this.http
-      .get(url, { observe: "response", responseType: "text" })
+      .get(url, { observe: 'response', responseType: 'text' })
       .pipe(
         map((response: HttpResponse<any>) => {
           return response.status === 200;
@@ -153,12 +172,12 @@ export class BoardComponent {
 
   handleError(error: any): void {
     this.snackBar.open('An error occurred: ' + error.message, 'Close', {
-      duration: 5000, 
+      duration: 5000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
-      panelClass: ['error-snackbar']
+      panelClass: ['error-snackbar'],
     });
 
-    console.error('Error', error); 
+    console.error('Error', error);
   }
 }

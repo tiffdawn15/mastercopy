@@ -4,10 +4,11 @@ import { ContactService } from '../contact.service';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-about',
-    imports: [CommonModule, MatFormField, MatLabel, ReactiveFormsModule, FormsModule],
+    imports: [CommonModule, MatFormField, MatLabel, ReactiveFormsModule, FormsModule, RouterModule],
     standalone: true,
     templateUrl: './about.component.html',
     styleUrl: './about.component.scss'
