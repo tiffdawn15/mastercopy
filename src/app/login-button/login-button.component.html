@@ -1,4 +1,14 @@
-<p>login-button works!</p>
 
 
-<button (click)="auth.loginWithRedirect()">Log in</button>
+<h1>Login</h1>
+
+<button 
+  (click)="login()" 
+  [disabled]="!isHydrated()"
+  [class.opacity-50]="!isHydrated()">
+  {{ isHydrated() ? 'Log in' : 'Loading...' }}
+</button>
+
+@if (!isHydrated()) {
+  <p class="text-sm text-gray-500">Initializing authentication...</p>
+}

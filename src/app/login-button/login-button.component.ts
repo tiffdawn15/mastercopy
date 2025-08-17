@@ -1,3 +1,4 @@
+import { catchError, of } from 'rxjs';
 import { Component, Inject, PLATFORM_ID, afterNextRender, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
@@ -6,19 +7,7 @@ import { AuthService } from '@auth0/auth0-angular';
     selector: 'app-login-button',
     imports: [],
     standalone: true,
-    template: `
-    <p>login-button works!</p>
-    <button 
-      (click)="login()" 
-      [disabled]="!isHydrated()"
-      [class.opacity-50]="!isHydrated()">
-      {{ isHydrated() ? 'Log in' : 'Loading...' }}
-    </button>
-    
-    @if (!isHydrated()) {
-      <p class="text-sm text-gray-500">Initializing authentication...</p>
-    }
-  `,
+    templateUrl: './login-button.component.html',
     styleUrls: ['./login-button.component.css']
 })
 export class LoginButtonComponent {
@@ -33,16 +22,19 @@ export class LoginButtonComponent {
     
     if (this.isBrowser) {
       afterNextRender(() => {
-        // Mark as hydrated after the component is rendered in the browser
         this.isHydrated.set(true);
-        console.log('Component hydrated and ready for interaction');
       });
     }
   }
 
   login() {
     if (this.isBrowser && this.isHydrated()) {
-      this.auth.loginWithRedirect().subscribe({
+      this.auth.loginWithRedirect().pipe(
+        catchError((error) => {
+          console.error('Error occurred:', error);
+          return of(null); 
+        })
+      ).subscribe({
         next: () => console.log('Login initiated'),
         error: (err) => console.error('Login error:', err)
       });
