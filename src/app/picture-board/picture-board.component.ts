@@ -2,11 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { HeaderComponent } from "../header/header.component";
 import { ActivatedRoute, Router } from "@angular/router";
-import {
-  HttpResponse,
-  HttpErrorResponse,
-  HttpClient,
-} from "@angular/common/http";
+import { HttpResponse, HttpErrorResponse, HttpClient } from "@angular/common/http";
 import { Observable, map, catchError, of } from "rxjs";
 
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';

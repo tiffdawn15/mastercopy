@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExploreComponent } from './explore.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
@@ -11,19 +11,18 @@ describe('ExploreComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExploreComponent, 
-        HttpClientModule
-      ], 
-      providers: [
+    imports: [ExploreComponent],
+    providers: [
         {
-          provide: ActivatedRoute,
-          useValue: {
-            params: of({ id: '123' }), // Mock route parameters
-            queryParams: of({ search: 'test' }), // Mock query parameters
-          }
-        }
-      ]
-    })
+            provide: ActivatedRoute,
+            useValue: {
+                params: of({ id: '123' }), // Mock route parameters
+                queryParams: of({ search: 'test' }), // Mock query parameters
+            }
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(ExploreComponent);

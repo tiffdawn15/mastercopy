@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ImageService } from './image.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 
 
@@ -10,8 +10,9 @@ describe('ImageService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+});
     service = TestBed.inject(ImageService);
   });
 
