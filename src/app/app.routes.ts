@@ -5,7 +5,8 @@ import { AboutComponent } from "./about/about.component";
 import { ClientTestComponent } from "./client-test/client-test.component";
 
 export const routes: Routes = [
-  { path: "", component: PictureBoardComponent },
+  { path: "", component: PictureBoardComponent,
+  },
 
   { path: "explore", component: ExploreComponent },
   { path: "search", component: PictureBoardComponent },
