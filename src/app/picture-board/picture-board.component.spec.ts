@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatPaginatorModule } from "@angular/material/paginator";
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { By } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -14,14 +14,12 @@ describe("PictureBoardComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
+    imports: [BrowserAnimationsModule,
         PictureBoardComponent,
-        HttpClientModule,
         MatPaginatorModule,
-        RouterModule.forRoot([]),
-      ],
-    }).compileComponents();
+        RouterModule.forRoot([])],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
 
     fixture = TestBed.createComponent(PictureBoardComponent);
     component = fixture.componentInstance;

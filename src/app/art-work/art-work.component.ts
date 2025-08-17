@@ -6,19 +6,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; /
 
 import { ImageService } from './../image.service';
 import { HeaderComponent } from '../header/header.component';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
-  selector: 'app-art-work',
-  standalone: true,
-  imports: [
-    CommonModule,
-    HeaderComponent,
+    selector: 'app-art-work',
+    imports: [
     MatIconModule,
-    MatProgressSpinnerModule, 
-  ],
-  templateUrl: './art-work.component.html',
-  styleUrl: './art-work.component.css',
+    MatProgressSpinnerModule
+],
+    standalone: true,
+    templateUrl: './art-work.component.html',
+    styleUrl: './art-work.component.css'
 })
 export class ArtWorkComponent {
   id = '';
@@ -42,7 +40,6 @@ export class ArtWorkComponent {
   ) {
     // this.id = this.route.snapshot.paramMap.get('id');
     this.route.paramMap.subscribe((paramMap) => {
-      console.log('paramMap', paramMap);
       this.id = paramMap.get('id')!;
       this.getImage();
     });
@@ -53,9 +50,7 @@ export class ArtWorkComponent {
   getImage() {
     this.isLoading = true;
     this.imageService.getArtwork(this.id).subscribe((resp) => {
-      console.log(resp);
       this.url = `https://www.artic.edu/iiif/2/${resp.data.image_id}/full/843,/0/default.jpg`;
-      console.log(this.url);
       this.title = resp.data.title;
       this.artist = resp.data.artist_title;
       this.artist_display = resp.data.artist_display;

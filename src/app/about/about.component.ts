@@ -10,21 +10,18 @@ import {
 import { ContactService } from '../contact.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
-  selector: 'app-about',
-  standalone: true,
-  imports: [
-    
-    CommonModule,
-    HeaderComponent,
+    selector: 'app-about',
+    imports: [
     MatInputModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
-  ],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.css',
+    ReactiveFormsModule
+],
+    standalone: true,
+    templateUrl: './about.component.html',
+    styleUrl: './about.component.css'
 })
 export class AboutComponent {
   contactForm = new FormGroup({

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { HeaderComponent } from "./header.component";
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 
 describe("HeaderComponent", () => {
@@ -10,8 +10,9 @@ describe("HeaderComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderComponent, HttpClientModule, RouterModule.forRoot([])],
-    }).compileComponents();
+    imports: [HeaderComponent, RouterModule.forRoot([])],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
