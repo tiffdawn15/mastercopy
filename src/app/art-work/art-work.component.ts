@@ -6,15 +6,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; /
 
 import { ImageService } from './../image.service';
 import { HeaderComponent } from '../header/header.component';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'app-art-work',
     imports: [
-        CommonModule,
-        MatIconModule,
-        MatProgressSpinnerModule,
-    ],
+    MatIconModule,
+    MatProgressSpinnerModule
+],
     standalone: true,
     templateUrl: './art-work.component.html',
     styleUrl: './art-work.component.css'

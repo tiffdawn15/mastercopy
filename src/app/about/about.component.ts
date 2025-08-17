@@ -10,16 +10,15 @@ import {
 import { ContactService } from '../contact.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'app-about',
     imports: [
-        CommonModule,
-        MatInputModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-    ],
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
+],
     standalone: true,
     templateUrl: './about.component.html',
     styleUrl: './about.component.css'

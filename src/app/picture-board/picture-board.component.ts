@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { HeaderComponent } from "../header/header.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpResponse, HttpErrorResponse, HttpClient } from "@angular/common/http";
@@ -20,11 +20,10 @@ export interface Photo {
 @Component({
     selector: "app-picture-board",
     imports: [
-        CommonModule,
-        MatProgressSpinnerModule,
-        MatPaginatorModule,
-        MatSnackBarModule,
-    ],
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatSnackBarModule
+],
     standalone: true,
     templateUrl: "./picture-board.component.html",
     styleUrl: "./picture-board.component.css"
