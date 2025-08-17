@@ -3,14 +3,13 @@ import { HeaderComponent } from '../header/header.component';
 import { ParallaxDirective } from '../parallax.directive';
 
 @Component({
-  selector: 'app-explore',
-  standalone: true,
-  imports: [
-    HeaderComponent,
-    ParallaxDirective,
-  ],
-  templateUrl: './explore.component.html',
-  styleUrl: './explore.component.css'
+    selector: 'app-explore',
+    imports: [
+        HeaderComponent,
+        ParallaxDirective,
+    ],
+    templateUrl: './explore.component.html',
+    styleUrl: './explore.component.css'
 })
 export class ExploreComponent {
   onSearch(term: string) {

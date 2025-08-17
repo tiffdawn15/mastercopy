@@ -1,11 +1,10 @@
 import { afterNextRender, Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-client-test',
-  standalone: true,
-  imports: [],
-  templateUrl: './client-test.component.html',
-  styleUrl: './client-test.component.css'
+    selector: 'app-client-test',
+    imports: [],
+    templateUrl: './client-test.component.html',
+    styleUrl: './client-test.component.css'
 })
 export class ClientTestComponent {
   @ViewChild('content')

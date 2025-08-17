@@ -7,15 +7,15 @@ import {
 import { HeaderComponent } from "./header/header.component";
 
 @Component({
-  selector: "app-root",
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    HeaderComponent,
-    RouterModule,
-  ],
-  templateUrl: "./app.component.html",
-  styleUrl: "./app.component.css",
+    selector: "app-root",
+    imports: [
+        RouterOutlet,
+        RouterModule,
+        HeaderComponent
+    ],
+    standalone: true,
+    templateUrl: "./app.component.html",
+    styleUrl: "./app.component.css"
 })
 export class AppComponent {
 

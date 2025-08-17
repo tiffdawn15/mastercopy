@@ -9,19 +9,18 @@ import { Router, RouterLink } from '@angular/router';
 import { LoginButtonComponent } from "../login-button/login-button.component";
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [
-    MatChipsModule,
-    MatIconModule,
-    MatInputModule,
-    MatFormFieldModule,
-    FormsModule,
-    RouterLink,
-    LoginButtonComponent
-],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+    selector: 'app-header',
+    imports: [
+        MatChipsModule,
+        MatIconModule,
+        MatInputModule,
+        MatFormFieldModule,
+        FormsModule,
+        RouterLink,
+    ],
+    standalone: true,
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.css'
 })
 export class HeaderComponent {
   @Output() searchEvent = new EventEmitter<string>();

@@ -3,10 +3,10 @@ import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-login-button',
-  standalone: true,
-  imports: [],
-  template: `
+    selector: 'app-login-button',
+    imports: [],
+    standalone: true,
+    template: `
     <p>login-button works!</p>
     <button 
       (click)="login()" 
@@ -19,7 +19,7 @@ import { AuthService } from '@auth0/auth0-angular';
       <p class="text-sm text-gray-500">Initializing authentication...</p>
     }
   `,
-  styleUrls: ['./login-button.component.css']
+    styleUrls: ['./login-button.component.css']
 })
 export class LoginButtonComponent {
   private isBrowser: boolean;

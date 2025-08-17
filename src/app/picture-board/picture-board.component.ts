@@ -18,17 +18,16 @@ export interface Photo {
 }
 
 @Component({
-  selector: "app-picture-board",
-  standalone: true,
-  imports: [
-    CommonModule,
-    HeaderComponent,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatSnackBarModule,
-  ],
-  templateUrl: "./picture-board.component.html",
-  styleUrl: "./picture-board.component.css",
+    selector: "app-picture-board",
+    imports: [
+        CommonModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        MatSnackBarModule,
+    ],
+    standalone: true,
+    templateUrl: "./picture-board.component.html",
+    styleUrl: "./picture-board.component.css"
 })
 export class PictureBoardComponent implements OnInit {
   @Input() searchQuery: string = "";

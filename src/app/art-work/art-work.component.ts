@@ -9,16 +9,15 @@ import { HeaderComponent } from '../header/header.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-art-work',
-  standalone: true,
-  imports: [
-    CommonModule,
-    HeaderComponent,
-    MatIconModule,
-    MatProgressSpinnerModule, 
-  ],
-  templateUrl: './art-work.component.html',
-  styleUrl: './art-work.component.css',
+    selector: 'app-art-work',
+    imports: [
+        CommonModule,
+        HeaderComponent,
+        MatIconModule,
+        MatProgressSpinnerModule,
+    ],
+    templateUrl: './art-work.component.html',
+    styleUrl: './art-work.component.css'
 })
 export class ArtWorkComponent {
   id = '';
