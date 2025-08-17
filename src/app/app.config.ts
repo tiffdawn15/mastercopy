@@ -3,7 +3,7 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideAuth0 } from '@auth0/auth0-angular';
 import { AppConfigService } from './app-config.service';
@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),
     provideClientHydration(),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
     provideAnimationsAsync(),
     {
       provide: 'REDIRECT_URI',
