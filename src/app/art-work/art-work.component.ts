@@ -6,6 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; /
 
 import { ImageService } from './../image.service';
 import { HeaderComponent } from '../header/header.component';
+import { CommonModule } from '@angular/common';
 
 
 @Component({

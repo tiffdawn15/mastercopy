@@ -5,19 +5,20 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { LoginButtonComponent } from "../login-button/login-button.component";
 
 @Component({
     selector: 'app-header',
     imports: [
-        MatChipsModule,
-        MatIconModule,
-        MatInputModule,
-        MatFormFieldModule,
-        FormsModule,
-        RouterLink,
-    ],
+    MatChipsModule,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    RouterLink,
+    RouterModule,
+],
     standalone: true,
     templateUrl: './header.component.html',
     styleUrl: './header.component.css'
@@ -27,9 +28,7 @@ export class HeaderComponent {
   searchQuery: string = '';
 
   constructor(private imageService: ImageService, private router: Router) {
-    afterNextRender(() => {
-
-    });
+ 
   }
 
   onSearch() {

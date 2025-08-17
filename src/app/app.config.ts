@@ -14,6 +14,7 @@ export const REDIRECT_URI = new InjectionToken<string>('REDIRECT_URI', {
   providedIn: 'root',
   factory: () => {
     const appConfigService = inject(AppConfigService);
+    console.log( appConfigService.getOrigin())
     return appConfigService.getOrigin();
   },
 });
@@ -35,7 +36,7 @@ export const appConfig: ApplicationConfig = {
       domain: 'dev-fyfv8uggeoexkhf5.us.auth0.com',
       clientId: '5jqIWFTnCyHAyeMLvCYZYnb0H9HHIaMc',
       authorizationParams: {
-        redirect_uri: REDIRECT_URI.toString(), 
+        redirect_uri: 'http://localhost:4200', 
       }
     }),
   ],
