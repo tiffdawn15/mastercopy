@@ -145,7 +145,6 @@ export class PictureBoardComponent implements OnInit {
   }
 
   onClick(image: Photo, id: number) {
-    console.log('image', image);
     this.router.navigate([`/artwork/${id}`]);
   }
 

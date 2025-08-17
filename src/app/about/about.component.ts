@@ -16,11 +16,11 @@ import { CommonModule } from '@angular/common';
     selector: 'app-about',
     imports: [
         CommonModule,
-        HeaderComponent,
         MatInputModule,
         MatFormFieldModule,
         ReactiveFormsModule,
     ],
+    standalone: true,
     templateUrl: './about.component.html',
     styleUrl: './about.component.css'
 })
