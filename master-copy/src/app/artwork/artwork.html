@@ -1,0 +1,26 @@
+@if (isLoading) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner> <!-- Angular Material spinner -->
+    </div>
+  }
+  
+  <div class="back-button">
+    <button mat-icon-button (click)="goToHomePage()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  
+  <div class="container-lg artwork-container">
+    <img src="{{ url }}" class="artwork" />
+    <div class="info-container">
+      <p class="title">Title: {{ title }}</p>
+      <p class="artist">Artist: {{ artist }}</p>
+      <p class="artist">{{ provenance_text }}</p>
+      <p class="artist">Place of Origin: {{ placeOfOrigin }}</p>
+      <p class="artist">Medium: {{ medium_display }}</p>
+      <p class="artist">Department Title: {{ department_title }}</p>
+      <p class="artist">Date: {{ date_end }}</p>
+      <p class="artist">Categories: {{ category_titles }}</p>
+      <p class="artist">Artist Display: {{ artist_display }}</p>
+    </div>
+  </div>

@@ -1,0 +1,25 @@
+<div class="header">
+    <img class="logo" src="../../assets/logo.png" />
+  
+    <div class="nav">
+      <a mat-fab extended routerLink="/"> Home </a>
+    </div>
+  
+    <div class="nav">
+      <a mat-fab routerLink="/about"> About </a>
+    </div>
+  
+    <div class="search-container">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        placeholder="Search"
+        class="search-input"
+        (change)="onSearch()"
+      />
+      <mat-icon class="close-icon">close</mat-icon>
+    </div>
+  
+  </div>
+  
