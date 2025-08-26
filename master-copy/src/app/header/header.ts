@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
+import { Component, DOCUMENT, EventEmitter, Inject, Output } from '@angular/core';
 import { Image } from '../image';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -19,14 +20,20 @@ import { MatInputModule } from '@angular/material/input';
     RouterModule,
   ],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrl: './header.css',
 })
 export class Header {
   @Output() searchEvent = new EventEmitter<string>();
   searchQuery: string = '';
+  authenticated = false;
 
-  constructor(private imageService: Image, private router: Router) {
- 
+  constructor(
+    public auth: AuthService,
+    @Inject(DOCUMENT) public document: Document,
+    private imageService: Image,
+    private router: Router
+  ) {
+    auth.isAuthenticated$.forEach((each) => (this.authenticated = each));
   }
 
   onSearch() {

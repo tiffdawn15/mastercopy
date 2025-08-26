@@ -5,18 +5,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-artwork',
-  imports: [
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatSnackBarModule,
-    MatIconModule, 
-     ],
+  imports: [MatProgressSpinnerModule, MatPaginatorModule, MatSnackBarModule, MatIconModule],
   templateUrl: './artwork.html',
-  styleUrl: './artwork.css'
+  styleUrl: './artwork.css',
 })
 export class Artwork {
   id = '';
@@ -33,12 +27,7 @@ export class Artwork {
   placeOfOrigin: string = '';
   provenance_text: string = '';
 
-  constructor(
-    private imageService: Image,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    // this.id = this.route.snapshot.paramMap.get('id');
+  constructor(private imageService: Image, private route: ActivatedRoute, private router: Router) {
     this.route.paramMap.subscribe((paramMap) => {
       this.id = paramMap.get('id')!;
       this.getImage();
@@ -63,7 +52,6 @@ export class Artwork {
       this.provenance_text = resp.data.provenance_text;
     });
     this.isLoading = false;
-
   }
 
   goToHomePage() {

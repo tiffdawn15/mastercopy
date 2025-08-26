@@ -1,5 +1,5 @@
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, catchError, of } from 'rxjs';
 import { Image, Pagination } from '../image';
@@ -16,16 +16,13 @@ export interface Photo {
 
 @Component({
   selector: 'app-board',
-  imports: [
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatSnackBarModule
-  ],
+  imports: [MatProgressSpinnerModule, MatPaginatorModule, MatSnackBarModule],
   templateUrl: './board.html',
-  styleUrl: './board.css'
+  styleUrl: './board.css',
 })
 export class Board {
-  @Input() searchQuery: string = "";
+  @Input() searchQuery: string = '';
+  private router = inject(Router);
 
   images: Photo[] = [];
   length = 50;
@@ -45,7 +42,6 @@ export class Board {
     private http: HttpClient,
     private imageService: Image,
     private route: ActivatedRoute,
-    private router: Router,
     private snackBar: MatSnackBar
   ) {
     this.images = [];
@@ -56,7 +52,7 @@ export class Board {
     this.getImages(this.page);
 
     this.route.queryParams.subscribe((params) => {
-      this.searchQuery = params["q"];
+      this.searchQuery = params['q'];
       if (this.searchQuery) {
         this.onSearch(this.searchQuery, this.page);
       } else {
@@ -108,7 +104,7 @@ export class Board {
     this.page.limit = e.pageSize;
 
     this.route.queryParams.subscribe((params) => {
-      this.searchQuery = params["q"];
+      this.searchQuery = params['q'];
       if (this.searchQuery) {
         this.onSearch(this.searchQuery, this.page);
       } else {
@@ -134,36 +130,38 @@ export class Board {
         }
       },
       (error) => {
-       this.handleError(error);
+        this.handleError(error);
       }
     );
   }
 
-  onClick(image: Photo, id: number) {
-    this.router.navigate([`/artwork/${id}`]);
+  onClick(image: Photo) {
+    try {
+      this.router.navigate([`/artwork/${image.id}`]);
+    } catch (error) {
+      console.error('Unexpected error:', error);
+    }
   }
 
   checkUrlStatus(url: string): Observable<boolean> {
-    return this.http
-      .get(url, { observe: "response", responseType: "text" })
-      .pipe(
-        map((response: HttpResponse<any>) => {
-          return response.status === 200;
-        }),
-        catchError((error: HttpErrorResponse) => {
-          return of(false);
-        })
-      );
+    return this.http.get(url, { observe: 'response', responseType: 'text' }).pipe(
+      map((response: HttpResponse<any>) => {
+        return response.status === 200;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return of(false);
+      })
+    );
   }
 
   handleError(error: any): void {
     this.snackBar.open('An error occurred: ' + error.message, 'Close', {
-      duration: 5000, 
+      duration: 5000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
-      panelClass: ['error-snackbar']
+      panelClass: ['error-snackbar'],
     });
 
-    console.error('Error', error); 
+    console.error('Error', error);
   }
 }

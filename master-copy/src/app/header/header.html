@@ -20,6 +20,16 @@
       />
       <mat-icon class="close-icon">close</mat-icon>
     </div>
-  
+
+    <!-- // TODO: Style button -->
+    @if (authenticated ) {
+      <button (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })">
+        Log out
+      </button>
+    } 
+    @else {
+      <button (click)="auth.loginWithRedirect()">Log in</button>
+    }
+
   </div>
   

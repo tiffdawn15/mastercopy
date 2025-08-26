@@ -1,14 +1,12 @@
 import { Routes } from '@angular/router';
 import { About } from './about/about';
 import { Board } from './board/board';
+import { User} from './user/user.js'
 
 export const routes: Routes = [
-    { path: "", component: Board,
-    },
+    { path: "", component: Board},
     { path: "about", component: About },
-    // { path: "login", component: LoginButtonComponent },
-  
-    { path: '**', redirectTo: '' },
+    { path: "user", component: User },
     {
       path: `artwork/:id`,
       loadComponent: () =>
@@ -16,4 +14,5 @@ export const routes: Routes = [
           (mod) => mod.Artwork
         ),
     },
+    { path: '**', redirectTo: '' },
 ];
