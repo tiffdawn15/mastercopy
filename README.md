@@ -1,59 +1,59 @@
-# mastercopy
+# MasterCopy
 
-Mastercopy is a personal portfolio project by Tiffany Messer. It is a Pinterest-style web application that allows users to browse and explore works of art using the [Art Institute of Chicago's API](https://api.artic.edu/docs/#quick-start).
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
 
-## Table of Contents
+## Development server
 
-- [Project Description](#project-description)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Technologies Used](#technologies-used)
-- [Future Improvements](#future-improvements)
+To start a local development server, run:
 
-## Project Description
+```bash
+ng serve
+```
 
-Mastercopy is inspired by the artistic practice of creating "mastercopies" of famous works. The application aims to provide a centralized platform for accessing high-quality images of artwork from open-source museum catalogs, addressing the challenges of finding authentic images through traditional search engines.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Features
+## Code scaffolding
 
-- **Art Board**:
-  - Browse artwork in a paginated grid layout.
-  - Search for artwork using keywords.
-  - Click on an image to view detailed information about the piece.
-- **Art Work Details**:
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-  - View detailed information about a specific piece of artwork, including its title, artist, and description.
+```bash
+ng generate component component-name
+```
 
-- **About Page**:
-  - Learn about the mission and purpose of the application.
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-## Installation
+```bash
+ng generate --help
+```
 
-1. Clone the repository:
-   `bash git clone https://github.com/your-username/mastercopy.git`
-2. Navigate to client directory:
-   `cd mastercopy/client`
-3. Install dependencies:
-   `npm i`
-4. Start dev server
-   `npm start`
-5. In browser navigate to `http://localhost:4200`
+## Building
 
-## Usage
+To build the project run:
 
-- Use the search bar to find artwork by keywords..
-- Click on an image to view more details about the artwork.
-- Explore the About page to understand the application's mission.
+```bash
+ng build
+```
 
-## Technologies Used:
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-- Frontend: Angular, TypeScript, HTML, CSS
-- API: Art Institute of Chicago API
-- Styling: Bootstrap or custom CSS (specify if applicable)
+## Running unit tests
 
-## Future Improvements:
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-- Add user accounts to allow users to favorite and save artwork to collections
-- Integrate additional museum APIs to expand the artwork catalog
-- Implement a backend for user authentication and data storage.
+```bash
+ng test
+```
+
+## Running end-to-end tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

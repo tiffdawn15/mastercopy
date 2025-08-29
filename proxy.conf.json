@@ -1,0 +1,8 @@
+{
+    "/api": {
+      "target": "https://api.artic.edu",
+      "secure": true,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }

@@ -1,0 +1,80 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    font-family: "Atma", system-ui;
+    font-weight: 800;
+  
+  }
+  
+  .header a[mat-fab] {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  .header a[mat-fab]:hover {
+    background-color: black;
+    color: white;
+  }
+  
+  .logo {
+    width: 2.5em;
+    height: 2.5em;
+    padding: 1em;
+  }
+  
+  .nav {
+    margin: 1em;
+    padding: 1em;
+    border-radius: 15%;
+  }
+  .nav:hover {
+    color: white;
+    background-color: black;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 24px;
+  }
+  
+  .search-input {
+    width: 100%;
+    display: flex;
+    margin: 1em;
+    margin-left: auto;
+    border-radius: 24px;
+    color: rgb(51, 51, 51);
+    background-color: rgb(241, 241, 241);
+    opacity: 0.8;
+    height: 50%;
+    padding-left: 30px;
+  }
+  
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 75%;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    color: gray;
+    transition: opacity 0.3s;
+  }
+  
+  .close-icon {
+    position: absolute;
+    display: none;
+    right: 1em;
+    color: gray;
+    transition: opacity 0.3s;
+  }
+  
+  .search-input:focus {
+    box-shadow: rgba(0, 132, 255, 0.5) 0px 0px 0px 4px;
+  }
+  
+  .search-input:focus ~ .close-icon {
+    display: block;
+  }
+  

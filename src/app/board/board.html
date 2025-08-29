@@ -1,0 +1,29 @@
+@if (isLoading) {
+<div class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>
+}
+
+<div class="container">
+  @for (image of images; track image) {
+  <div class="image-container">
+    <img [src]="image.url" class="image" (click)="onClick(image)" />
+    <p class="title">{{ image.title }}</p>
+  </div>
+  }
+</div>
+
+<mat-paginator
+  #paginator
+  class="demo-paginator"
+  (page)="handlePageEvent($event)"
+  [length]="length"
+  [pageSize]="page.limit"
+  [disabled]="disabled"
+  [showFirstLastButtons]="showFirstLastButtons"
+  [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+  [hidePageSize]="hidePageSize"
+  [pageIndex]="page.page"
+  aria-label="Select page"
+>
+</mat-paginator>
