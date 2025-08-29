@@ -3,7 +3,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-button {
+/* button {
     display: inline-block;
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -23,4 +23,4 @@ button {
       background-color: #cccccc;
       cursor: not-allowed;
     }
-  }
+  } */
