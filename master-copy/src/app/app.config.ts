@@ -22,11 +22,9 @@ export const appConfig: ApplicationConfig = {
     
       authorizationParams: {
         redirect_uri: window.location.origin,
-        
-        // Request this audience at user authentication time
+        cacheLocation: 'localstorage', // Optional: Use local storage for session persistence
+        useRefreshTokens: true,
         audience: 'https://dev-fyfv8uggeoexkhf5.us.auth0.com/api/v2/',
-    
-        // Request this scope at user authentication time
         scope: 'read:current_user',
       },
     

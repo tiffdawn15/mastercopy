@@ -6,6 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 
+
 @Component({
   selector: 'app-artwork',
   imports: [MatProgressSpinnerModule, MatPaginatorModule, MatSnackBarModule, MatIconModule],
@@ -56,5 +57,11 @@ export class Artwork {
 
   goToHomePage() {
     this.router.navigate(['/']);
+  }
+
+  onClick() {
+    console.log('clicked'); 
+
+    // TODO: 
   }
 }

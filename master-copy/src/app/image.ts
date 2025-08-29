@@ -26,7 +26,7 @@ export interface ImageData {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Image {
   constructor(private http: HttpClient) {}
@@ -46,4 +46,7 @@ export class Image {
     return this.http.get<any>(artworkUrl);
   }
 
+  saveArtwork(id: string) {
+    let url = 'localhost:8080/api/collections/'
+  }
 }

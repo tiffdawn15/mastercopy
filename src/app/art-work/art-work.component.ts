@@ -5,8 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import spinner module
 
 import { ImageService } from './../image.service';
-import { HeaderComponent } from '../header/header.component';
-import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -39,6 +37,7 @@ export class ArtWorkComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    console.log('here'); 
     // this.id = this.route.snapshot.paramMap.get('id');
     this.route.paramMap.subscribe((paramMap) => {
       this.id = paramMap.get('id')!;
