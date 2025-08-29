@@ -22,17 +22,16 @@ export const appConfig: ApplicationConfig = {
     
       authorizationParams: {
         redirect_uri: window.location.origin,
-        cacheLocation: 'localstorage', // Optional: Use local storage for session persistence
+        cacheLocation: 'localstorage', 
         useRefreshTokens: true,
         audience: 'https://dev-fyfv8uggeoexkhf5.us.auth0.com/api/v2/',
         scope: 'read:current_user',
       },
     
-      // Specify configuration for the interceptor              
       httpInterceptor: {
         allowedList: [
           {
-            // Match any request that starts 'https://dev-fyfv8uggeoexkhf5.us.auth0.com/api/v2/' (note the asterisk)
+            // TODO: Put this into 
             uri: 'https://dev-fyfv8uggeoexkhf5.us.auth0.com/api/v2/*',
             tokenOptions: {
               authorizationParams: {

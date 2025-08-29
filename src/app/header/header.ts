@@ -43,4 +43,14 @@ export class Header {
       });
     }
   }
+
+  login() {
+    this.auth.loginWithRedirect({
+      authorizationParams: {
+        redirectUri: `${window.location.origin}/user`,
+      },
+    });
+
+    this.router.navigate(['/user']);
+  }
 }
