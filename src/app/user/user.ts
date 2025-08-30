@@ -1,11 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
+import {MatCardModule} from '@angular/material/card';
+
 
 @Component({
   selector: 'app-user',
-  imports: [CommonModule],
+  imports: [CommonModule, 
+    MatCardModule
+  ],
   templateUrl: './user.html',
   styleUrl: './user.css',
 })
@@ -13,7 +18,10 @@ export class User implements OnInit {
   user$ = {}
   profileJson = '';
 
-  constructor(public auth: AuthService, private http: HttpClient) {
+  constructor(public auth: AuthService, 
+    private http: HttpClient, 
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -27,5 +35,10 @@ export class User implements OnInit {
         console.log('User is not authenticated.');
       }
     });
+  }
+
+  homePage(): void {
+    this.router.navigate(['/']);
+
   }
 }
