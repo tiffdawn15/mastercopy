@@ -24,6 +24,9 @@ export class User implements OnInit {
   ) {
   }
 
+
+
+
   ngOnInit(): void {
     this.user$ = this.auth.user$;
     this.auth.user$.subscribe((user) => {

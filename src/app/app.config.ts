@@ -8,6 +8,7 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authHttpInterceptorFn, provideAuth0 } from '@auth0/auth0-angular';
+import { environment } from '../env/env';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authHttpInterceptorFn]), withFetch()),
     provideAuth0({
       // The domain and clientId were configured in the previous chapter
-      domain: 'dev-fyfv8uggeoexkhf5.us.auth0.com',
+      domain: environment.auth0Domain,
       clientId: '5jqIWFTnCyHAyeMLvCYZYnb0H9HHIaMc',
     
       authorizationParams: {

@@ -1,6 +1,42 @@
 # MasterCopy
+[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR_NETLIFY_BADGE_ID/deploy-status)](https://app.netlify.com/sites/YOUR_NETLIFY_PROJECT_NAME/deploys)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
+MasterCopy is a modern web application built with Angular, designed to provide a seamless user experience for managing and exploring artworks. This project leverages the Angular CLI for efficient development and includes a variety of components to ensure scalability and maintainability.
+
+---
+## Features
+
+- **Dynamic User Interface**: Built with Angular Material for a responsive and visually appealing design.
+- **Authentication**: Secure user authentication and profile management.
+- **Routing**: Modular routing for easy navigation between different sections of the application.
+- **Reusable Components**: Modular and reusable components for better code organization.
+- **Real-time Updates**: Automatic reloading during development for a smooth workflow.
+
+---
+
+## Components Overview
+
+### 1. **User Component**
+   - Displays user-specific information such as saved artworks and profile details.
+   - Includes a call-to-action button to start browsing artworks.
+
+### 2. **Artworks Component**
+   - Lists available artworks with options to filter and sort.
+   - Provides detailed views for individual artworks.
+
+### 3. **Authentication Module**
+   - Handles user login, registration, and logout functionality.
+   - Integrates with third-party authentication providers if needed.
+
+### 4. **Shared Module**
+   - Contains reusable components like buttons, cards, and utility directives.
+   - Ensures consistency across the application.
+
+### 5. **Routing Module**
+   - Manages navigation between different views.
+   - Implements lazy loading for better performance.
+
+---
 
 ## Development server
 
