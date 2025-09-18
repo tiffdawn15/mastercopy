@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { MatCardModule } from '@angular/material/card';
-import { Users } from '../users';
-import { map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -18,21 +16,15 @@ export class User implements OnInit {
   user$ = this.auth.user$;
   code$ = this.user$.pipe(map((user) => JSON.stringify(user, null, 2)));
 
-  id = '';
-  profileJson = '';
-  name = '';
-  email = '';
-
-  constructor(
-    private router: Router,
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
- 
-
+    this.user$.subscribe((user) => {
+      if (user) {
+        localStorage.setItem('userToken', user?.sub || '');
+      }
+    });
   }
-
-
 
   homePage(): void {
     this.router.navigate(['/']);

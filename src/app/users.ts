@@ -9,8 +9,6 @@ import {environment} from "../env/env.js";
  * THIS IS A SERVICE CLASS
  */
 export class Users {
-  //   curl -L -g 'https://{tenantDomain}/api/v2/users/:id' \
-  // -H 'Accept: application/json'
   constructor(private http: HttpClient) {}
 
   /**
@@ -29,18 +27,3 @@ export class Users {
     return this.http.get(url, { headers });
   }
 }
-
-
-// var myHeaders = new Headers();
-// myHeaders.append("Accept", "application/json");
-
-// var requestOptions = {
-//   method: 'GET',
-//   headers: myHeaders,
-//   redirect: 'follow'
-// };
-
-// fetch("https://{yourDomain}/userinfo", requestOptions)
-//   .then(response => response.text())
-//   .then(result => console.log(result))
-//   .catch(error => console.log('error', error));

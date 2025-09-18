@@ -1,6 +1,5 @@
 import { AuthService } from '@auth0/auth0-angular';
 import { Component, DOCUMENT, EventEmitter, Inject, Output } from '@angular/core';
-import { Image } from '../image';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
@@ -30,7 +29,6 @@ export class Header {
   constructor(
     public auth: AuthService,
     @Inject(DOCUMENT) public document: Document,
-    private imageService: Image,
     private router: Router
   ) {
     auth.isAuthenticated$.forEach((each) => (this.authenticated = each));

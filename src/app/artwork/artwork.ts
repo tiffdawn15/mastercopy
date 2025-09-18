@@ -5,7 +5,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
-
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-artwork',
@@ -28,7 +28,15 @@ export class Artwork {
   placeOfOrigin: string = '';
   provenance_text: string = '';
 
-  constructor(private imageService: Image, private route: ActivatedRoute, private router: Router) {
+  authenticated = false;
+
+  constructor(
+    private auth: AuthService,
+    private imageService: Image,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    auth.isAuthenticated$.forEach((each) => (this.authenticated = each)); 
     this.route.paramMap.subscribe((paramMap) => {
       this.id = paramMap.get('id')!;
       this.getImage();
@@ -60,8 +68,8 @@ export class Artwork {
   }
 
   onClick() {
-    console.log('clicked'); 
+    console.log('clicked');
 
-    // TODO: 
+    // TODO:
   }
 }
