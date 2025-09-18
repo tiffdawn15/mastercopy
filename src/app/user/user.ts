@@ -1,47 +1,40 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import {MatCardModule} from '@angular/material/card';
-
+import { MatCardModule } from '@angular/material/card';
+import { Users } from '../users';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user',
-  imports: [CommonModule, 
-    MatCardModule
-  ],
+  imports: [CommonModule, MatCardModule],
   templateUrl: './user.html',
   styleUrl: './user.css',
 })
 export class User implements OnInit {
-  user$ = {}
+  private auth = inject(AuthService);
+  user$ = this.auth.user$;
+  code$ = this.user$.pipe(map((user) => JSON.stringify(user, null, 2)));
+
+  id = '';
   profileJson = '';
+  name = '';
+  email = '';
 
-  constructor(public auth: AuthService, 
-    private http: HttpClient, 
-    private router: Router
-  ) {
+  constructor(
+    private router: Router,
+  ) {}
+
+  ngOnInit() {
+ 
+
   }
 
 
-
-
-  ngOnInit(): void {
-    this.user$ = this.auth.user$;
-    this.auth.user$.subscribe((user) => {
-      console.log(user);
-      if (user) {
-        console.log('Name:', user.name);
-        console.log('Email:', user.email);
-      } else {
-        console.log('User is not authenticated.');
-      }
-    });
-  }
 
   homePage(): void {
     this.router.navigate(['/']);
-
   }
 }

@@ -78,3 +78,7 @@
     display: block;
   }
   
+  .authButton {
+    margin-top: 1em;
+    height: 3em;
+  }

@@ -1,9 +1,8 @@
 <div>
   <h1 class="title">Your saved artworks</h1>
-  @if (auth.user$ | async; as profile) {
-  <h2>Welcome, {{ profile.name }}</h2>
-  <p>Email: {{ profile.email }}</p>
-  <pre>{{ profile | json }}</pre>
+  @if (user$ | async; as user) {
+  <h2>Welcome, {{ user.name }}</h2>
+  <p>Email: {{ user.email }}</p>
   }
 
   <mat-card class="center-card">

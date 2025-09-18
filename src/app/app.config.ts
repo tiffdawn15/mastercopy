@@ -19,14 +19,14 @@ export const appConfig: ApplicationConfig = {
     provideAuth0({
       // The domain and clientId were configured in the previous chapter
       domain: environment.auth0Domain,
-      clientId: '5jqIWFTnCyHAyeMLvCYZYnb0H9HHIaMc',
+      clientId: environment.auth0ApiToken,
     
       authorizationParams: {
         redirect_uri: window.location.origin,
         cacheLocation: 'localstorage', 
         useRefreshTokens: true,
         audience: 'https://dev-fyfv8uggeoexkhf5.us.auth0.com/api/v2/',
-        scope: 'read:current_user',
+        scope: 'read:current_user profile email name',
       },
     
       httpInterceptor: {
