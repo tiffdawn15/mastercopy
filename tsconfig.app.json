@@ -8,7 +8,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/test/step-definitions/step-def.js"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]
